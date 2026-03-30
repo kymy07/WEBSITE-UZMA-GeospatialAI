@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coverage — UZMA Satellite Portal</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+.coverage-wrap{padding:2rem;max-width:1100px;margin:0 auto;}
+.coverage-intro{background:#fff;border-radius:10px;border:1px solid var(--gray-line);padding:1.5rem;margin-bottom:1.5rem;display:flex;gap:1rem;flex-wrap:wrap;}
+.coverage-stat{flex:1;min-width:120px;text-align:center;}
+.cov-num{font-size:26px;font-weight:800;color:var(--orange);}
+.cov-label{font-size:10px;color:var(--gray-muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+
+/* ===== MAP CONTROLS ===== */
+.map-section{margin-bottom:1.5rem;}
+.map-toolbar{background:var(--gray-dark);border-radius:10px 10px 0 0;padding:10px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.map-tb-label{font-size:10px;font-weight:700;color:#888;letter-spacing:1.5px;text-transform:uppercase;}
+.map-tb-btn{background:#1A1A1A;border:1px solid #444;color:#888;padding:6px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;transition:all .18s;letter-spacing:.5px;}
+.map-tb-btn:hover{border-color:#888;color:#ccc;}
+.map-tb-btn.on{background:var(--orange);border-color:var(--orange);color:#fff;}
+.map-tb-sep{width:1px;height:18px;background:#333;flex-shrink:0;}
+.aoi-status{font-size:11px;color:var(--orange);margin-left:auto;display:flex;align-items:center;gap:6px;}
+.aoi-status.hide{display:none;}
+
+/* ===== MAP CONTAINER ===== */
+#coverage-map{height:420px;border-radius:0;border:none;}
+.map-wrap{border-radius:0 0 10px 10px;overflow:hidden;border:1px solid #444;border-top:none;}
+
+/* ===== AOI PANEL ===== */
+.aoi-panel{background:#fff;border:1px solid var(--gray-line);border-radius:10px;padding:16px 20px;margin-bottom:1.5rem;display:none;}
+.aoi-panel.show{display:block;}
+.aoi-panel-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.aoi-panel-title{font-size:12px;font-weight:800;color:var(--gray-dark);letter-spacing:1.5px;text-transform:uppercase;}
+.aoi-clear-btn{background:none;border:1px solid var(--gray-line);color:var(--gray-muted);padding:5px 12px;border-radius:4px;font-size:11px;cursor:pointer;}
+.aoi-clear-btn:hover{border-color:var(--orange);color:var(--orange);}
+.aoi-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+@media(max-width:580px){.aoi-stats{grid-template-columns:repeat(2,1fr);}}
+.aoi-stat{background:var(--gray-bg);border-radius:6px;padding:10px 12px;}
+.aoi-stat-val{font-size:18px;font-weight:800;color:var(--orange);}
+.aoi-stat-label{font-size:10px;color:var(--gray-muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.aoi-actions{display:flex;gap:8px;margin-top:12px;}
+.aoi-action-btn{background:var(--orange);color:#fff;border:none;padding:9px 20px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:1px;}
+.aoi-action-btn:hover{background:var(--orange-light);}
+.aoi-action-btn.sec{background:var(--gray-dark);color:#fff;}
+.aoi-action-btn.sec:hover{background:#333;}
+
+/* ===== CLOUD COVER LEGEND ===== */
+.cloud-legend{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap;}
+.cloud-leg-label{font-size:11px;color:var(--gray-muted);margin-right:4px;}
+.cloud-leg-bar{height:12px;width:140px;border-radius:4px;background:linear-gradient(to right,#E1F5EE,#FFF0E8,#FCEBEB);border:1px solid var(--gray-line);}
+.cloud-leg-ends{display:flex;justify-content:space-between;width:140px;font-size:10px;color:var(--gray-muted);}
+
+/* ===== COVERAGE TABLE ===== */
+.coverage-table{background:#fff;border-radius:10px;border:1px solid var(--gray-line);overflow:hidden;margin-top:1.5rem;}
+.cov-table-hdr{background:var(--gray-dark);padding:12px 20px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr;gap:1rem;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#888;}
+.cov-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr;gap:1rem;padding:12px 20px;border-bottom:1px solid var(--gray-card);align-items:center;cursor:pointer;transition:background .15s;}
+.cov-row:last-child{border:none;}
+.cov-row:hover{background:var(--gray-bg);}
+.cov-region{font-size:13px;font-weight:700;color:var(--gray-dark);}
+.cov-state{font-size:11px;color:var(--gray-muted);}
+.cov-avail{font-size:11px;font-weight:700;padding:3px 8px;border-radius:12px;display:inline-block;}
+.avail-yes{background:#E1F5EE;color:#0F6E56;}
+.avail-partial{background:#FAEEDA;color:#633806;}
+.avail-soon{background:#ECEAE7;color:#555;}
+.cloud-bar-wrap{display:flex;align-items:center;gap:6px;}
+.cloud-bar{height:6px;border-radius:3px;flex:1;max-width:80px;}
+.cloud-pct{font-size:11px;font-weight:700;color:var(--gray-dark);}
+
+/* ===== REGION DETAIL MODAL ===== */
+.region-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem;}
+.region-modal-bg.open{display:flex;}
+.region-modal{background:#fff;border-radius:12px;width:100%;max-width:520px;overflow:hidden;border:1px solid var(--gray-line);}
+.region-modal-hdr{background:var(--gray-dark);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;}
+.region-modal-ttl{font-size:14px;font-weight:800;color:#fff;letter-spacing:1px;text-transform:uppercase;}
+.region-modal-x{background:none;border:none;color:#888;font-size:20px;cursor:pointer;}
+.region-modal-x:hover{color:#fff;}
+.region-modal-body{padding:20px;}
+.region-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.region-stat{background:var(--gray-bg);border-radius:6px;padding:10px;text-align:center;}
+.region-stat-val{font-size:20px;font-weight:800;color:var(--orange);}
+.region-stat-label{font-size:10px;color:var(--gray-muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.region-prod-list{display:flex;flex-direction:column;gap:6px;}
+.region-prod-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--gray-card);}
+.region-prod-row:last-child{border:none;}
+.region-prod-name{font-size:13px;font-weight:600;color:var(--gray-dark);}
+.region-modal-browse{width:100%;background:var(--orange);color:#fff;border:none;padding:11px;border-radius:6px;font-size:12px;font-weight:700;letter-spacing:1.5px;cursor:pointer;margin-top:12px;}
+.region-modal-browse:hover{background:var(--orange-light);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="marketplace.html"><img class="logo-img" src="LogoUzma.png" alt="UZMA"></a>
+  <div class="nav-links">
+    <a class="nav-link" href="marketplace.html">Marketplace</a>
+    <a class="nav-link" href="products.html">Products</a>
+    <a class="nav-link active" href="coverage.html">Coverage</a>
+    <a class="nav-link" href="api-docs.html">API Docs</a>
+  </div>
+  <div class="nav-right" id="nav-auth-area"></div>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<div class="page-hero">
+  <h1>Coverage Map</h1>
+  <p>Interactive satellite coverage across Malaysia. Draw your AOI to get instant scene estimates.</p>
+</div>
+
+<div class="coverage-wrap">
+  <div class="coverage-intro">
+    <div class="coverage-stat"><div class="cov-num">14</div><div class="cov-label">States Covered</div></div>
+    <div class="coverage-stat"><div class="cov-num">2,847</div><div class="cov-label">Scenes Available</div></div>
+    <div class="coverage-stat"><div class="cov-num">98.4%</div><div class="cov-label">Cloud-free Scenes</div></div>
+    <div class="coverage-stat"><div class="cov-num">24h</div><div class="cov-label">Archive Delivery</div></div>
+    <div class="coverage-stat"><div class="cov-num">3 days</div><div class="cov-label">Tasking Lead Time</div></div>
+  </div>
+
+  <!-- MAP SECTION -->
+  <div class="map-section">
+    <div class="map-toolbar">
+      <span class="map-tb-label">Layer:</span>
+      <button class="map-tb-btn on" id="layer-optical" onclick="setLayer('optical',this)">Optical Coverage</button>
+      <button class="map-tb-btn" id="layer-sar" onclick="setLayer('sar',this)">SAR Coverage</button>
+      <button class="map-tb-btn" id="layer-cloud" onclick="setLayer('cloud',this)">Cloud Cover</button>
+      <div class="map-tb-sep"></div>
+      <span class="map-tb-label">Tools:</span>
+      <button class="map-tb-btn" id="aoi-btn" onclick="toggleAOI()">✏ Draw AOI</button>
+      <button class="map-tb-btn" onclick="clearAOI()">Clear AOI</button>
+      <span class="aoi-status hide" id="aoi-status">📍 Click map to draw polygon · Double-click to finish</span>
+    </div>
+    <div class="map-wrap">
+      <div id="coverage-map"></div>
+    </div>
+  </div>
+
+  <!-- AOI RESULTS PANEL -->
+  <div class="aoi-panel" id="aoi-panel">
+    <div class="aoi-panel-hdr">
+      <span class="aoi-panel-title">📐 AOI Analysis Results</span>
+      <button class="aoi-clear-btn" onclick="clearAOI()">Clear AOI</button>
+    </div>
+    <div class="aoi-stats">
+      <div class="aoi-stat"><div class="aoi-stat-val" id="aoi-area-val">—</div><div class="aoi-stat-label">Area (km²)</div></div>
+      <div class="aoi-stat"><div class="aoi-stat-val" id="aoi-scenes-val">—</div><div class="aoi-stat-label">Scenes Needed</div></div>
+      <div class="aoi-stat"><div class="aoi-stat-val" id="aoi-price-val">—</div><div class="aoi-stat-label">Est. Cost (HR)</div></div>
+      <div class="aoi-stat"><div class="aoi-stat-val" id="aoi-cloud-val">—</div><div class="aoi-stat-label">Avg Cloud Cover</div></div>
+    </div>
+    <div class="aoi-actions">
+      <button class="aoi-action-btn" onclick="window.location.href='marketplace.html'">Browse Available Scenes →</button>
+      <button class="aoi-action-btn sec" onclick="window.location.href='products.html'">Get Cost Estimate</button>
+    </div>
+  </div>
+
+  <!-- CLOUD LEGEND -->
+  <div id="cloud-legend-wrap" style="display:none;margin-bottom:1.5rem;background:#fff;padding:12px 16px;border-radius:8px;border:1px solid var(--gray-line);">
+    <div class="cloud-legend">
+      <span class="cloud-leg-label">Cloud Cover:</span>
+      <div>
+        <div class="cloud-leg-bar"></div>
+        <div class="cloud-leg-ends"><span>Low (0%)</span><span>High (100%)</span></div>
+      </div>
+      <span style="font-size:11px;color:var(--gray-muted);">Darker orange = more cloud cover historically</span>
+    </div>
+  </div>
+
+  <!-- COVERAGE TABLE -->
+  <div class="coverage-table">
+    <div class="cov-table-hdr">
+      <span>Region</span><span>Optical HR</span><span>Multispectral</span><span>SAR</span><span>Thermal</span><span>Cloud Cover</span>
+    </div>
+    <div id="cov-table-body"></div>
+  </div>
+</div>
+
+<!-- REGION DETAIL MODAL -->
+<div class="region-modal-bg" id="region-modal" onclick="bgClose(event,'region-modal')">
+  <div class="region-modal">
+    <div class="region-modal-hdr">
+      <span class="region-modal-ttl" id="region-modal-ttl">Region</span>
+      <button class="region-modal-x" onclick="closeModal('region-modal')">×</button>
+    </div>
+    <div class="region-modal-body" id="region-modal-body"></div>
+  </div>
+</div>
+
+<!-- CART + CHECKOUT + AUTH (same as other pages) -->
+<div class="overlay" id="ov" onclick="toggleCart()"></div>
+<div class="cart" id="cart">
+  <div class="cart-hdr"><span class="cart-ttl">Your Cart</span><button class="cart-x" onclick="toggleCart()">×</button></div>
+  <div class="cart-body" id="cart-body"><div class="empty">No items yet.</div></div>
+  <div id="cart-foot" style="display:none;">
+    <div class="cart-foot">
+      <div class="total-row"><span class="total-label">Total</span><span class="total-val" id="total-val">RM 0</span></div>
+      <button class="checkout" onclick="openPW()">PROCEED TO CHECKOUT</button>
+    </div>
+  </div>
+</div>
+<div class="pw-bg" id="pwm" onclick="bgClose(event,'pwm')">
+  <div class="pw-box">
+    <div class="pw-hdr"><h2>Access Verification</h2><p>Enter your UZMA credentials</p></div>
+    <div class="pw-body">
+      <div class="field"><label>Account Email</label><input type="email" id="pw-email" placeholder="name@example.com"></div>
+      <div class="field"><label>API Password / Access Key</label><input type="password" id="pw-pass" placeholder="••••••••••••"><div class="pw-err" id="pw-err"></div></div>
+      <div class="pw-actions"><button class="pw-cancel" onclick="closeModal('pwm')">Cancel</button><button class="pw-ok" id="pw-ok" onclick="submitPW()">CONFIRM ORDER</button></div>
+    </div>
+  </div>
+</div>
+<div class="auth-bg" id="auth-modal" onclick="bgClose(event,'auth-modal')">
+  <div class="auth-box">
+    <div class="auth-tabs"><div class="auth-tab on" id="tab-login" onclick="switchTab('login')">Log In</div><div class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</div></div>
+    <button class="auth-close" onclick="closeModal('auth-modal')">×</button>
+    <div class="auth-panel on" id="panel-login">
+      <h3>Welcome back</h3><p>Sign in to your UZMA account.</p>
+      <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="name@example.com"></div>
+      <div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="login-pass" placeholder="••••••••"><button class="pw-eye" onclick="toggleEye('login-pass',this)">👁</button></div></div>
+      <div class="auth-err" id="login-err"></div>
+      <button class="auth-submit" onclick="doLogin()">LOG IN</button>
+      <div class="auth-divider"><span>OR</span></div>
+      <button class="auth-or-btn" onclick="demoLogin()">Continue as Demo User</button>
+      <div class="auth-footer">No account? <a onclick="switchTab('signup')">Sign up free</a></div>
+    </div>
+    <div class="auth-panel" id="panel-signup">
+      <h3>Create your account</h3><p>Free access to preview all imagery.</p>
+      <div class="field"><label>Full Name</label><input type="text" id="su-name" placeholder="Ahmad bin Ibrahim"></div>
+      <div class="field"><label>Email</label><input type="email" id="su-email" placeholder="name@example.com"></div>
+      <div class="field"><label>Organisation</label><input type="text" id="su-org" placeholder="Company / University"></div>
+      <div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="su-pass" placeholder="Min. 8 characters" oninput="checkStrength(this.value)"><button class="pw-eye" onclick="toggleEye('su-pass',this)">👁</button></div><div class="strength-bar"><div class="strength-fill" id="strength-fill" style="width:0%;background:#E24B4A;"></div></div></div>
+      <div class="auth-err" id="su-err"></div>
+      <button class="auth-submit" onclick="doSignup()">CREATE ACCOUNT</button>
+      <div class="auth-footer">Already have an account? <a onclick="switchTab('login')">Log in</a></div>
+    </div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const REGIONS=[
+  {name:'Kuala Lumpur', state:'Wilayah Persekutuan', lat:3.147,lng:101.695, optical:'yes',ms:'yes',sar:'yes',tir:'yes',cloud:8,  scenes:186, area:243},
+  {name:'Selangor',     state:'Peninsular',          lat:3.07, lng:101.52,  optical:'yes',ms:'yes',sar:'yes',tir:'partial',cloud:22,scenes:312,area:7960},
+  {name:'Penang',       state:'Peninsular',          lat:5.41, lng:100.33,  optical:'yes',ms:'yes',sar:'partial',tir:'partial',cloud:35,scenes:142,area:1048},
+  {name:'Johor',        state:'Peninsular',          lat:1.86, lng:103.74,  optical:'yes',ms:'yes',sar:'yes',tir:'yes',cloud:28, scenes:245,area:19166},
+  {name:'Pahang',       state:'Peninsular',          lat:3.81, lng:103.33,  optical:'yes',ms:'yes',sar:'partial',tir:'soon',cloud:44,scenes:198,area:35965},
+  {name:'Perak',        state:'Peninsular',          lat:4.59, lng:101.09,  optical:'yes',ms:'partial',sar:'yes',tir:'partial',cloud:31,scenes:167,area:21035},
+  {name:'Kedah',        state:'Peninsular',          lat:6.12, lng:100.37,  optical:'yes',ms:'yes',sar:'partial',tir:'soon',cloud:26, scenes:134,area:9426},
+  {name:'Sabah',        state:'Borneo',              lat:5.98, lng:116.07,  optical:'yes',ms:'yes',sar:'yes',tir:'partial',cloud:52,scenes:298,area:73619},
+  {name:'Sarawak',      state:'Borneo',              lat:1.55, lng:110.35,  optical:'yes',ms:'yes',sar:'yes',tir:'yes',cloud:48, scenes:356,area:124450},
+  {name:'Putrajaya',    state:'Wilayah Persekutuan', lat:2.926,lng:101.696, optical:'yes',ms:'yes',sar:'partial',tir:'soon',cloud:12,scenes:88,area:49},
+];
+
+// ── MAP INIT ──────────────────────────────────────────────────────────
+const map=L.map('coverage-map',{center:[4.5,109.5],zoom:6,zoomControl:true});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:18}).addTo(map);
+
+let currentLayer='optical';
+let regionMarkers=[];
+let aoiPolygon=null;
+let aoiPoints=[];
+let aoiDrawing=false;
+let aoiPolyline=null;
+let cloudCircles=[];
+
+function getCloudColor(pct){
+  if(pct<20) return '#0F6E56';
+  if(pct<40) return '#D4540A';
+  return '#A32D2D';
+}
+
+function renderMarkers(){
+  regionMarkers.forEach(m=>map.removeLayer(m));
+  regionMarkers=[];
+  cloudCircles.forEach(c=>map.removeLayer(c));
+  cloudCircles=[];
+
+  REGIONS.forEach(r=>{
+    if(currentLayer==='cloud'){
+      const circle=L.circle([r.lat,r.lng],{
+        radius:Math.sqrt(r.area)*500,
+        color:getCloudColor(r.cloud),
+        fillColor:getCloudColor(r.cloud),
+        fillOpacity:0.35,
+        weight:1
+      }).addTo(map);
+      circle.bindTooltip(`<b>${r.name}</b><br>Cloud cover: ${r.cloud}%`,{sticky:true});
+      circle.on('click',()=>openRegionDetail(r));
+      cloudCircles.push(circle);
+    } else {
+      const available=currentLayer==='sar'?r.sar==='yes':r.optical==='yes';
+      const color=available?'#D4540A':'#3B8BD4';
+      const marker=L.circleMarker([r.lat,r.lng],{
+        radius:9,
+        fillColor:color,
+        color:'#fff',
+        weight:2,
+        fillOpacity:0.9
+      }).addTo(map);
+      marker.bindTooltip(`<b>${r.name}</b><br>${currentLayer==='sar'?'SAR':'Optical'}: ${available?'✓ Available':'~ Partial/Coming'}<br>${r.scenes} scenes available`,{sticky:true});
+      marker.on('click',()=>openRegionDetail(r));
+      regionMarkers.push(marker);
+    }
+  });
+}
+
+function setLayer(layer, btn){
+  currentLayer=layer;
+  document.querySelectorAll('.map-tb-btn[id^="layer-"]').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('cloud-legend-wrap').style.display=layer==='cloud'?'block':'none';
+  renderMarkers();
+}
+
+// ── AOI DRAW ──────────────────────────────────────────────────────────
+let tempMarkers=[];
+
+function toggleAOI(){
+  aoiDrawing=!aoiDrawing;
+  document.getElementById('aoi-btn').classList.toggle('on',aoiDrawing);
+  document.getElementById('aoi-status').classList.toggle('hide',!aoiDrawing);
+  map.getContainer().style.cursor=aoiDrawing?'crosshair':'';
+  if(!aoiDrawing&&aoiPoints.length>0) finishAOI();
+}
+
+map.on('click',function(e){
+  if(!aoiDrawing) return;
+  aoiPoints.push([e.latlng.lat,e.latlng.lng]);
+  const dot=L.circleMarker(e.latlng,{radius:5,fillColor:var_orange,color:'#fff',weight:2,fillOpacity:1});
+  dot.addTo(map);
+  tempMarkers.push(dot);
+  if(aoiPolyline) map.removeLayer(aoiPolyline);
+  if(aoiPoints.length>1){
+    aoiPolyline=L.polyline(aoiPoints,{color:'#D4540A',weight:2,dashArray:'5,5'}).addTo(map);
+  }
+});
+
+map.on('dblclick',function(e){
+  if(!aoiDrawing||aoiPoints.length<3) return;
+  e.originalEvent.preventDefault();
+  finishAOI();
+});
+
+const var_orange='#D4540A';
+
+function finishAOI(){
+  aoiDrawing=false;
+  document.getElementById('aoi-btn').classList.remove('on');
+  document.getElementById('aoi-status').classList.add('hide');
+  map.getContainer().style.cursor='';
+  if(aoiPolyline){map.removeLayer(aoiPolyline);aoiPolyline=null;}
+  tempMarkers.forEach(m=>map.removeLayer(m));tempMarkers=[];
+
+  if(aoiPoints.length<3){aoiPoints=[];return;}
+
+  if(aoiPolygon) map.removeLayer(aoiPolygon);
+  aoiPolygon=L.polygon(aoiPoints,{color:'#D4540A',fillColor:'#D4540A',fillOpacity:0.18,weight:2}).addTo(map);
+  map.fitBounds(aoiPolygon.getBounds(),{padding:[20,20]});
+  calculateAOI();
+}
+
+function calculateAOI(){
+  if(!aoiPolygon) return;
+  const bounds=aoiPolygon.getBounds();
+  const latDiff=bounds.getNorth()-bounds.getSouth();
+  const lngDiff=bounds.getEast()-bounds.getWest();
+  const centerLat=(bounds.getNorth()+bounds.getSouth())/2;
+  // Rough km² calculation
+  const latKm=latDiff*111;
+  const lngKm=lngDiff*111*Math.cos(centerLat*Math.PI/180);
+  const areakm2=Math.round(latKm*lngKm);
+  const scenesNeeded=Math.ceil(areakm2/25);
+  const estCost=scenesNeeded*850;
+  // Find closest region for cloud cover
+  const centerLng=(bounds.getEast()+bounds.getWest())/2;
+  let closest=REGIONS[0],minDist=999;
+  REGIONS.forEach(r=>{
+    const d=Math.sqrt(Math.pow(r.lat-centerLat,2)+Math.pow(r.lng-centerLng,2));
+    if(d<minDist){minDist=d;closest=r;}
+  });
+
+  document.getElementById('aoi-area-val').textContent=areakm2.toLocaleString();
+  document.getElementById('aoi-scenes-val').textContent=scenesNeeded;
+  document.getElementById('aoi-price-val').textContent='RM '+estCost.toLocaleString();
+  document.getElementById('aoi-cloud-val').textContent=closest.cloud+'%';
+  document.getElementById('aoi-panel').classList.add('show');
+  aoiPoints=[];
+}
+
+function clearAOI(){
+  if(aoiPolygon){map.removeLayer(aoiPolygon);aoiPolygon=null;}
+  if(aoiPolyline){map.removeLayer(aoiPolyline);aoiPolyline=null;}
+  tempMarkers.forEach(m=>map.removeLayer(m));tempMarkers=[];
+  aoiPoints=[];aoiDrawing=false;
+  document.getElementById('aoi-btn').classList.remove('on');
+  document.getElementById('aoi-status').classList.add('hide');
+  document.getElementById('aoi-panel').classList.remove('show');
+  map.getContainer().style.cursor='';
+}
+
+// ── COVERAGE TABLE ──────────────────────────────────────────────────
+function availBadge(v){
+  if(v==='yes') return '<span class="cov-avail avail-yes">✓ Available</span>';
+  if(v==='partial') return '<span class="cov-avail avail-partial">~ Partial</span>';
+  return '<span class="cov-avail avail-soon">⏳ Soon</span>';
+}
+
+function cloudBar(pct){
+  const color=pct<20?'#0F6E56':pct<40?'#D4540A':'#A32D2D';
+  return `<div class="cloud-bar-wrap"><div class="cloud-bar" style="background:linear-gradient(to right,${color}40,${color});width:${pct}px;max-width:80px;"></div><span class="cloud-pct">${pct}%</span></div>`;
+}
+
+document.getElementById('cov-table-body').innerHTML=REGIONS.map(r=>`
+  <div class="cov-row" onclick="openRegionDetail(${JSON.stringify(r).replace(/"/g,'&quot;')})">
+    <div><div class="cov-region">${r.name}</div><div class="cov-state">${r.state}</div></div>
+    ${availBadge(r.optical)}
+    ${availBadge(r.ms)}
+    ${availBadge(r.sar)}
+    ${availBadge(r.tir)}
+    ${cloudBar(r.cloud)}
+  </div>`).join('');
+
+// ── REGION DETAIL MODAL ──────────────────────────────────────────────
+function openRegionDetail(r){
+  if(typeof r==='string') r=JSON.parse(r);
+  document.getElementById('region-modal-ttl').textContent=r.name+', '+r.state;
+  document.getElementById('region-modal-body').innerHTML=`
+    <div class="region-stat-grid">
+      <div class="region-stat"><div class="region-stat-val">${r.scenes}</div><div class="region-stat-label">Scenes</div></div>
+      <div class="region-stat"><div class="region-stat-val">${r.cloud}%</div><div class="region-stat-label">Cloud Cover</div></div>
+      <div class="region-stat"><div class="region-stat-val">${(r.area/1000).toFixed(0)}k</div><div class="region-stat-label">Area km²</div></div>
+    </div>
+    <div class="region-prod-list">
+      <div class="region-prod-row"><span class="region-prod-name">Optical HR (50cm)</span>${availBadge(r.optical)}</div>
+      <div class="region-prod-row"><span class="region-prod-name">Multispectral (1–2m)</span>${availBadge(r.ms)}</div>
+      <div class="region-prod-row"><span class="region-prod-name">SAR C/L Band</span>${availBadge(r.sar)}</div>
+      <div class="region-prod-row"><span class="region-prod-name">Thermal Infrared (5m)</span>${availBadge(r.tir)}</div>
+    </div>
+    <button class="region-modal-browse" onclick="window.location.href='marketplace.html'">Browse Scenes for ${r.name} →</button>`;
+  document.getElementById('region-modal').classList.add('open');
+  map.setView([r.lat,r.lng],9,{animate:true});
+}
+
+// Init
+renderMarkers();
+</script>
+</body>
+</html>
