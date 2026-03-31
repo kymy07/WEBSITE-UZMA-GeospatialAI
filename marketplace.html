@@ -16,11 +16,11 @@
 /* ===== AI SEARCH ===== */
 .ai-search-wrap{max-width:680px;margin:0 auto;}
 .ai-search-box{display:flex;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(212,84,10,.4),0 6px 24px rgba(0,0,0,.4);position:relative;}
-.ai-search-box input{flex:1;background:#111;border:none;padding:14px 18px;color:#fff;font-size:14px;outline:none;}
+.ai-search-box input{flex:1;background:#111;border:none;padding:14px 18px;color:#fff;font-size:14px;outline:none;min-width:0;}
 .ai-search-box input::placeholder{color:#555;}
-.ai-badge{position:absolute;left:12px;top:50%;transform:translateY(-50%);background:var(--orange);color:#fff;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:2px 6px;border-radius:3px;pointer-events:none;}
+.ai-badge{position:absolute;left:12px;top:50%;transform:translateY(-50%);background:var(--orange);color:#fff;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:2px 6px;border-radius:3px;pointer-events:none;z-index:1;}
 .ai-search-box input{padding-left:52px;}
-.ai-search-box button{background:var(--orange);color:#fff;border:none;padding:0 26px;font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.ai-search-box button{background:var(--orange);color:#fff;border:none;padding:0 20px;font-size:11px;font-weight:700;letter-spacing:1.5px;cursor:pointer;transition:background .2s;white-space:nowrap;flex-shrink:0;}
 .ai-search-box button:hover{background:var(--orange-light);}
 .ai-suggestions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center;}
 .ai-sug{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#aaa;font-size:11px;padding:5px 12px;border-radius:20px;cursor:pointer;transition:all .2s;}
@@ -33,7 +33,8 @@
 @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
 
 /* ===== ANALYTICS BAR ===== */
-.analytics-bar{background:#fff;border-bottom:1px solid var(--gray-line);padding:.6rem 2rem;display:flex;align-items:center;gap:2rem;overflow-x:auto;font-size:11px;color:var(--gray-muted);}
+.analytics-bar{background:#fff;border-bottom:1px solid var(--gray-line);padding:.6rem 1.2rem;display:flex;align-items:center;gap:1.5rem;overflow-x:auto;font-size:11px;color:var(--gray-muted);-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.analytics-bar::-webkit-scrollbar{display:none;}
 .abar-stat{display:flex;align-items:center;gap:6px;white-space:nowrap;}
 .abar-val{font-weight:800;color:var(--gray-dark);}
 .abar-trend{font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;}
@@ -42,44 +43,43 @@
 .abar-divider{width:1px;height:18px;background:var(--gray-line);flex-shrink:0;}
 
 /* ===== FILTER BAR ===== */
-.filter-bar{background:#fff;border-bottom:1px solid var(--gray-line);padding:.85rem 2rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.filter-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-muted);margin-right:4px;}
-.chip{border:1px solid var(--gray-line);background:#fff;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;color:var(--gray-mid);cursor:pointer;transition:all .18s;}
+.filter-bar{background:#fff;border-bottom:1px solid var(--gray-line);padding:.7rem 1.2rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.filter-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-muted);margin-right:2px;}
+.chip{border:1px solid var(--gray-line);background:#fff;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;color:var(--gray-mid);cursor:pointer;transition:all .18s;}
 .chip:hover,.chip.on{background:var(--orange);border-color:var(--orange);color:#fff;}
-.res-filter-wrap{margin-left:auto;display:flex;align-items:center;gap:6px;}
-.res-chip{border:1px solid var(--gray-line);background:#fff;padding:5px 12px;border-radius:4px;font-size:11px;font-weight:700;color:var(--gray-mid);cursor:pointer;transition:all .18s;letter-spacing:.5px;}
+.res-filter-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.res-chip{border:1px solid var(--gray-line);background:#fff;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700;color:var(--gray-mid);cursor:pointer;transition:all .18s;letter-spacing:.5px;}
 .res-chip.on.hr{background:var(--orange);border-color:var(--orange);color:#fff;}
 .res-chip.on.lr{background:#3B8BD4;border-color:#3B8BD4;color:#fff;}
 .res-chip.on.all-r{background:var(--gray-dark);border-color:var(--gray-dark);color:#fff;}
 .res-chip:not(.on):hover{background:var(--gray-card);}
 
 /* ===== COMPARE BAR ===== */
-.compare-bar{background:var(--gray-dark);padding:.6rem 2rem;display:none;align-items:center;gap:12px;border-bottom:2px solid var(--orange);}
+.compare-bar{background:var(--gray-dark);padding:.6rem 1.2rem;display:none;align-items:center;gap:10px;border-bottom:2px solid var(--orange);flex-wrap:wrap;}
 .compare-bar.show{display:flex;}
-.cmp-label{font-size:11px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;}
-.cmp-slots{display:flex;gap:8px;flex:1;}
-.cmp-slot{background:#1A1A1A;border:1px dashed #444;border-radius:6px;padding:6px 14px;font-size:12px;color:#666;min-width:160px;display:flex;align-items:center;justify-content:space-between;}
+.cmp-label{font-size:10px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
+.cmp-slots{display:flex;gap:8px;flex:1;flex-wrap:wrap;}
+.cmp-slot{background:#1A1A1A;border:1px dashed #444;border-radius:6px;padding:6px 12px;font-size:11px;color:#666;min-width:120px;display:flex;align-items:center;justify-content:space-between;}
 .cmp-slot.filled{border-color:var(--orange);color:#fff;border-style:solid;}
 .cmp-slot-x{background:none;border:none;color:#666;cursor:pointer;font-size:14px;line-height:1;padding:0 0 0 8px;}
 .cmp-slot-x:hover{color:var(--orange);}
-.cmp-btn{background:var(--orange);color:#fff;border:none;padding:8px 20px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:1.5px;cursor:pointer;transition:background .2s;}
+.cmp-btn{background:var(--orange);color:#fff;border:none;padding:8px 16px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:background .2s;white-space:nowrap;}
 .cmp-btn:disabled{background:#333;color:#666;cursor:not-allowed;}
 .cmp-btn:not(:disabled):hover{background:var(--orange-light);}
-.cmp-clear{background:none;border:1px solid #444;color:#888;padding:8px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;}
+.cmp-clear{background:none;border:1px solid #444;color:#888;padding:8px 12px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;}
 .cmp-clear:hover{border-color:#888;color:#ccc;}
 
 /* ===== GRID ===== */
-.container{padding:1.8rem 2rem;max-width:1100px;margin:0 auto;}
+.container{padding:1.5rem 1.2rem;max-width:1100px;margin:0 auto;}
 .bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;}
 .count{font-size:12px;color:var(--gray-muted);}
 .count b{color:var(--orange);}
-.bar-right{display:flex;align-items:center;gap:8px;}
+.bar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .sort{border:1px solid var(--gray-line);background:#fff;padding:7px 10px;border-radius:4px;font-size:12px;color:var(--gray-mid);outline:none;cursor:pointer;}
-.ai-result-label{background:#FFF0E8;border:1px solid var(--orange);color:var(--orange);font-size:11px;font-weight:700;padding:4px 12px;border-radius:4px;display:none;align-items:center;gap:6px;}
+.ai-result-label{background:#FFF0E8;border:1px solid var(--orange);color:var(--orange);font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;display:none;align-items:center;gap:6px;}
 .ai-result-label.show{display:flex;}
 .ai-result-label button{background:none;border:none;color:var(--orange);cursor:pointer;font-size:13px;line-height:1;padding:0 0 0 4px;}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;}
-@media(max-width:640px){.grid{grid-template-columns:1fr;}}
 
 /* ===== CARD ===== */
 .card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--gray-line);transition:transform .2s,box-shadow .2s;position:relative;}
@@ -87,108 +87,139 @@
 .card.high-res{border-top:3px solid var(--orange);}
 .card.low-res{border-top:3px solid #3B8BD4;}
 .card.wishlisted{box-shadow:0 0 0 2px #E86A1A;}
-.img-wrap{position:relative;height:210px;overflow:hidden;background:#111;}
+.img-wrap{position:relative;height:180px;overflow:hidden;background:#111;}
 .img-wrap img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;}
-.locked-overlay{position:absolute;inset:0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(10,10,10,.52);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
-.lock-ring{width:42px;height:42px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;}
-.lock-ring svg{width:20px;height:20px;fill:#fff;}
-.locked-label{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.75);}
-.prev-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);color:#fff;padding:6px 18px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:1.5px;transition:background .2s;}
+.locked-overlay{position:absolute;inset:0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(10,10,10,.52);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.lock-ring{width:38px;height:38px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;}
+.lock-ring svg{width:18px;height:18px;fill:#fff;}
+.locked-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75);}
+.prev-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);color:#fff;padding:5px 14px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:background .2s;}
 .prev-btn:hover{background:rgba(255,255,255,.24);}
-.badge-res{position:absolute;top:10px;left:10px;font-size:10px;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:1px;color:#fff;}
+.badge-res{position:absolute;top:8px;left:8px;font-size:9px;font-weight:700;padding:3px 7px;border-radius:3px;letter-spacing:1px;color:#fff;}
 .badge-res.hr{background:var(--orange);}
 .badge-res.lr{background:#3B8BD4;}
-.badge-type{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.65);color:rgba(255,255,255,.9);font-size:10px;font-weight:600;padding:3px 9px;border-radius:3px;letter-spacing:1px;}
-.badge-cm{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,.65);color:#fff;font-size:10px;font-weight:600;padding:3px 9px;border-radius:3px;letter-spacing:.5px;}
-/* Wishlist + Compare buttons on card */
-.card-actions{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:5px;z-index:10;}
-.ca-btn{width:30px;height:30px;border-radius:6px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s;backdrop-filter:blur(4px);}
+.badge-cm{position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,.65);color:#fff;font-size:9px;font-weight:600;padding:3px 7px;border-radius:3px;}
+.card-actions{position:absolute;top:8px;right:8px;display:flex;flex-direction:column;gap:4px;z-index:10;}
+.ca-btn{width:28px;height:28px;border-radius:6px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s;backdrop-filter:blur(4px);}
 .ca-wish{background:rgba(0,0,0,.55);}
 .ca-wish:hover,.ca-wish.on{background:#E86A1A;}
 .ca-cmp{background:rgba(0,0,0,.55);}
 .ca-cmp:hover,.ca-cmp.on{background:#3B8BD4;}
-.card-body{padding:14px 16px;}
-.card-name{font-size:15px;font-weight:700;color:var(--gray-dark);margin-bottom:4px;}
-.card-loc{font-size:12px;color:var(--gray-muted);display:flex;align-items:center;gap:4px;margin-bottom:8px;}
-.card-loc svg{width:11px;height:11px;fill:var(--orange);flex-shrink:0;}
-.tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
-.tag{background:var(--gray-card);font-size:11px;padding:3px 8px;border-radius:3px;color:var(--gray-mid);font-weight:500;}
+.card-body{padding:12px 14px;}
+.card-name{font-size:13px;font-weight:700;color:var(--gray-dark);margin-bottom:3px;}
+.card-loc{font-size:11px;color:var(--gray-muted);display:flex;align-items:center;gap:4px;margin-bottom:7px;}
+.card-loc svg{width:10px;height:10px;fill:var(--orange);flex-shrink:0;}
+.tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:9px;}
+.tag{background:var(--gray-card);font-size:10px;padding:2px 7px;border-radius:3px;color:var(--gray-mid);font-weight:500;}
 .tag.hr-tag{background:#FFF0E8;color:#C04008;}
 .tag.lr-tag{background:#E6F1FB;color:#185FA5;}
-.card-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--gray-card);padding-top:10px;}
-.price{font-size:19px;font-weight:800;color:var(--orange);}
+.card-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--gray-card);padding-top:9px;}
+.price{font-size:17px;font-weight:800;color:var(--orange);}
 .price-note{font-size:10px;color:var(--gray-muted);}
-.add-btn{background:var(--gray-dark);color:#fff;border:none;padding:8px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:background .2s;}
+.add-btn{background:var(--gray-dark);color:#fff;border:none;padding:7px 12px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:background .2s;}
 .add-btn:hover,.add-btn.added{background:var(--orange);}
-/* AI match badge */
-.ai-match{position:absolute;bottom:10px;right:10px;background:rgba(212,84,10,.9);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:3px;letter-spacing:1px;}
+.ai-match{position:absolute;bottom:8px;right:8px;background:rgba(212,84,10,.9);color:#fff;font-size:9px;font-weight:800;padding:3px 7px;border-radius:3px;letter-spacing:1px;}
 
 /* ===== PREVIEW MODAL ===== */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;}
 .modal-bg.open{display:flex;}
-.modal{background:var(--gray-dark);border-radius:10px;width:100%;max-width:680px;overflow:hidden;border:1px solid #444;}
+.modal{background:var(--gray-dark);border-radius:10px;width:100%;max-width:680px;overflow:hidden;border:1px solid #444;max-height:90vh;overflow-y:auto;}
 .modal-hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid #444;}
-.modal-ttl{font-size:14px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;}
+.modal-ttl{font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;}
 .modal-x{background:none;border:none;color:#888;font-size:22px;cursor:pointer;line-height:1;padding:0;}
 .modal-x:hover{color:#fff;}
-.modal-img-wrap{position:relative;height:300px;overflow:hidden;}
-.modal-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:blur(3px) brightness(.65);pointer-events:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;}
+.modal-img-wrap{position:relative;height:240px;overflow:hidden;}
+.modal-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:blur(3px) brightness(.65);pointer-events:none;}
 .wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-.wm span{font-size:20px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.12);transform:rotate(-28deg);white-space:nowrap;}
-.modal-body{padding:16px 20px;}
-.modal-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px;}
+.wm span{font-size:18px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.12);transform:rotate(-28deg);white-space:nowrap;}
+.modal-body{padding:14px 18px;}
+.modal-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
 .modal-tag{background:#1A1A1A;border:1px solid #3A3A3A;color:#999;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:.5px;}
-.modal-foot{display:flex;justify-content:space-between;align-items:center;}
-.modal-price{font-size:24px;font-weight:800;color:var(--orange);}
+.modal-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.modal-price{font-size:22px;font-weight:800;color:var(--orange);}
 .modal-note{font-size:10px;color:#666;margin-top:2px;}
-.modal-add{background:var(--orange);color:#fff;border:none;padding:11px 26px;border-radius:5px;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:2px;transition:background .2s;}
+.modal-add{background:var(--orange);color:#fff;border:none;padding:11px 22px;border-radius:5px;font-size:12px;font-weight:800;cursor:pointer;letter-spacing:1.5px;transition:background .2s;}
 .modal-add:hover{background:var(--orange-light);}
 
 /* ===== COMPARE MODAL ===== */
-.cmp-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;}
+.cmp-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:1rem;overflow-y:auto;}
 .cmp-modal-bg.open{display:flex;}
 .cmp-modal{background:#1A1A1A;border-radius:12px;width:100%;max-width:860px;border:1px solid #333;overflow:hidden;}
-.cmp-modal-hdr{background:var(--gray-dark);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333;}
-.cmp-modal-ttl{font-size:13px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;}
+.cmp-modal-hdr{background:var(--gray-dark);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333;}
+.cmp-modal-ttl{font-size:12px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;}
 .cmp-modal-x{background:none;border:none;color:#888;font-size:22px;cursor:pointer;}
 .cmp-modal-x:hover{color:#fff;}
 .cmp-table{width:100%;border-collapse:collapse;}
-.cmp-table th{padding:14px 20px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#888;border-bottom:1px solid #333;text-align:left;}
+.cmp-table th{padding:12px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#888;border-bottom:1px solid #333;text-align:left;}
 .cmp-table th:not(:first-child){text-align:center;background:#222;}
-.cmp-table td{padding:12px 20px;font-size:13px;color:#ccc;border-bottom:1px solid #2a2a2a;vertical-align:middle;}
+.cmp-table td{padding:10px 16px;font-size:12px;color:#ccc;border-bottom:1px solid #2a2a2a;vertical-align:middle;}
 .cmp-table td:not(:first-child){text-align:center;}
 .cmp-table tr:last-child td{border-bottom:none;}
-.cmp-table .row-label{font-size:11px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:1px;}
-.cmp-img{width:100%;height:120px;object-fit:cover;filter:blur(3px) brightness(.6);}
+.cmp-table .row-label{font-size:10px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:1px;}
+.cmp-img{width:100%;height:110px;object-fit:cover;filter:blur(3px) brightness(.6);}
 .cmp-win{color:var(--orange);font-weight:800;}
 .cmp-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;}
 .cmp-badge.good{background:#E1F5EE;color:#0F6E56;}
 .cmp-badge.meh{background:#FAEEDA;color:#633806;}
 
 /* ===== WISHLIST SIDEBAR ===== */
-.wishlist-panel{position:fixed;right:0;top:0;width:320px;height:100vh;background:#fff;border-left:1px solid var(--gray-line);z-index:250;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.15);}
+.wishlist-panel{position:fixed;right:0;top:0;width:310px;height:100vh;background:#fff;border-left:1px solid var(--gray-line);z-index:250;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;box-shadow:-4px 0 24px rgba(0,0,0,.15);}
 .wishlist-panel.open{transform:translateX(0);}
-.wl-hdr{padding:16px 20px;border-bottom:1px solid var(--gray-line);display:flex;justify-content:space-between;align-items:center;}
-.wl-ttl{font-size:13px;font-weight:800;color:var(--gray-dark);letter-spacing:1px;text-transform:uppercase;}
+.wl-hdr{padding:14px 18px;border-bottom:1px solid var(--gray-line);display:flex;justify-content:space-between;align-items:center;}
+.wl-ttl{font-size:12px;font-weight:800;color:var(--gray-dark);letter-spacing:1px;text-transform:uppercase;}
 .wl-x{background:none;border:none;font-size:20px;cursor:pointer;color:var(--gray-muted);}
-.wl-body{flex:1;overflow-y:auto;padding:12px;}
+.wl-body{flex:1;overflow-y:auto;padding:10px;}
 .wl-empty{padding:2rem;text-align:center;color:var(--gray-muted);font-size:13px;}
-.wl-item{background:var(--gray-bg);border-radius:8px;padding:12px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start;}
-.wl-item-img{width:60px;height:50px;border-radius:4px;object-fit:cover;filter:blur(2px) brightness(.7);flex-shrink:0;}
+.wl-item{background:var(--gray-bg);border-radius:8px;padding:10px;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start;}
+.wl-item-img{width:56px;height:46px;border-radius:4px;object-fit:cover;filter:blur(2px) brightness(.7);flex-shrink:0;}
 .wl-item-info{flex:1;}
-.wl-item-name{font-size:12px;font-weight:700;color:var(--gray-dark);}
-.wl-item-price{font-size:13px;font-weight:800;color:var(--orange);margin-top:2px;}
-.wl-item-rm{background:none;border:none;color:#bbb;cursor:pointer;font-size:16px;line-height:1;flex-shrink:0;}
+.wl-item-name{font-size:11px;font-weight:700;color:var(--gray-dark);}
+.wl-item-price{font-size:12px;font-weight:800;color:var(--orange);margin-top:2px;}
+.wl-item-rm{background:none;border:none;color:#bbb;cursor:pointer;font-size:15px;line-height:1;flex-shrink:0;}
 .wl-item-rm:hover{color:#E24B4A;}
-.wl-foot{padding:12px 16px;border-top:1px solid var(--gray-line);}
-.wl-add-all{width:100%;background:var(--orange);color:#fff;border:none;padding:10px;border-radius:6px;font-size:12px;font-weight:700;letter-spacing:1.5px;cursor:pointer;}
+.wl-foot{padding:10px 14px;border-top:1px solid var(--gray-line);}
+.wl-add-all{width:100%;background:var(--orange);color:#fff;border:none;padding:10px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:1.5px;cursor:pointer;}
 .wl-add-all:hover{background:var(--orange-light);}
 
 /* NAV wishlist btn */
-.wl-nav-btn{background:none;border:1px solid #3A3A3A;color:#888;padding:7px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.wl-nav-btn{background:none;border:1px solid #3A3A3A;color:#888;padding:7px 12px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all .2s;display:flex;align-items:center;gap:5px;}
 .wl-nav-btn:hover{border-color:var(--orange);color:var(--orange);}
 .wl-nav-count{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:1px 6px;border-radius:10px;display:none;}
 .wl-nav-count.show{display:inline;}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .hero{padding:2rem 1rem 1.8rem;}
+  .hero h1{font-size:22px;letter-spacing:1px;}
+  .hero p{font-size:12px;margin-bottom:1.2rem;}
+  .ai-search-box input{font-size:13px;padding:12px 14px;padding-left:48px;}
+  .ai-search-box button{padding:0 14px;font-size:10px;}
+  .ai-suggestions{gap:6px;}
+  .ai-sug{font-size:10px;padding:4px 10px;}
+  .filter-bar{gap:5px;}
+  .chip{font-size:10px;padding:4px 10px;}
+  .res-filter-wrap{width:100%;margin-top:2px;}
+  .grid{grid-template-columns:1fr 1fr;gap:.8rem;}
+  .container{padding:1rem .9rem;}
+  .card-name{font-size:12px;}
+  .tags{gap:3px;}
+  .tag{font-size:9px;padding:2px 5px;}
+  .price{font-size:15px;}
+  .add-btn{padding:6px 10px;font-size:9px;}
+  .wishlist-panel{width:100%;max-width:340px;}
+  .wl-nav-btn .wl-nav-label{display:none;}
+  .compare-bar{gap:6px;}
+  .cmp-slots{gap:5px;}
+  .cmp-slot{min-width:100px;font-size:10px;padding:5px 10px;}
+}
+@media(max-width:420px){
+  .grid{grid-template-columns:1fr;}
+  .img-wrap{height:200px;}
+  .hero h1{font-size:18px;}
+  .filter-bar{padding:.6rem .8rem;}
+  .container{padding:.9rem .8rem;}
+  .analytics-bar{gap:1rem;padding:.6rem .9rem;}
+}
 </style>
 </head>
 <body>
@@ -202,9 +233,19 @@
     <a class="nav-link" href="api-docs.html">API Docs</a>
   </div>
   <div class="nav-right" id="nav-auth-area">
-    <button class="wl-nav-btn" onclick="toggleWishlist()">♡ Wishlist <span class="wl-nav-count" id="wl-count">0</span></button>
+    <button class="wl-nav-btn" onclick="toggleWishlist()">♡ <span class="wl-nav-label">Wishlist</span><span class="wl-nav-count" id="wl-count">0</span></button>
   </div>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile-drawer" id="nav-mobile-drawer">
+  <a class="nav-mobile-link active" href="marketplace.html">Marketplace</a>
+  <a class="nav-mobile-link" href="products.html">Products</a>
+  <a class="nav-mobile-link" href="coverage.html">Coverage</a>
+  <a class="nav-mobile-link" href="api-docs.html">API Docs</a>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -216,13 +257,13 @@
   <div class="ai-search-wrap">
     <div class="ai-search-box">
       <span class="ai-badge">AI</span>
-      <input type="text" id="q" placeholder='Try: "SAR flood mapping Sarawak under RM700" or "high-res Penang recent"' oninput="onSearchInput()">
+      <input type="text" id="q" placeholder='e.g. "SAR flood mapping Sarawak under RM700"' oninput="onSearchInput()">
       <button onclick="doAISearch()">SEARCH</button>
     </div>
     <div class="ai-suggestions">
       <span class="ai-sug" onclick="setQuery('optical Kuala Lumpur high resolution')">Optical KL high-res</span>
-      <span class="ai-sug" onclick="setQuery('SAR cloud cover Borneo')">SAR Borneo all-weather</span>
-      <span class="ai-sug" onclick="setQuery('multispectral NDVI plantation under RM1000')">NDVI plantation ≤RM1000</span>
+      <span class="ai-sug" onclick="setQuery('SAR cloud cover Borneo')">SAR Borneo</span>
+      <span class="ai-sug" onclick="setQuery('multispectral NDVI plantation under RM1000')">NDVI plantation</span>
       <span class="ai-sug" onclick="setQuery('thermal infrared Selangor')">Thermal Selangor</span>
     </div>
     <div class="ai-thinking" id="ai-thinking">
@@ -234,25 +275,25 @@
 
 <!-- ANALYTICS BAR -->
 <div class="analytics-bar">
-  <div class="abar-stat">📦 <span class="abar-val">12</span> scenes available</div>
+  <div class="abar-stat">📦 <span class="abar-val">12</span> scenes</div>
   <div class="abar-divider"></div>
-  <div class="abar-stat">📈 Avg price <span class="abar-val">RM 847</span> <span class="abar-trend up">▲ 3.2%</span></div>
+  <div class="abar-stat">📈 Avg <span class="abar-val">RM 847</span> <span class="abar-trend up">▲ 3.2%</span></div>
   <div class="abar-divider"></div>
-  <div class="abar-stat">🔥 Most searched: <span class="abar-val">Kuala Lumpur Optical</span></div>
+  <div class="abar-stat">🔥 <span class="abar-val">Kuala Lumpur Optical</span></div>
   <div class="abar-divider"></div>
-  <div class="abar-stat">⭐ Top rated: <span class="abar-val">SAR C-Band, 3m</span></div>
+  <div class="abar-stat">⭐ <span class="abar-val">SAR C-Band, 3m</span></div>
   <div class="abar-divider"></div>
-  <div class="abar-stat">📅 Newest: <span class="abar-val">Putrajaya Multispectral (Dec 15)</span></div>
+  <div class="abar-stat">📅 <span class="abar-val">Putrajaya MS (Dec 15)</span></div>
   <div class="abar-divider"></div>
-  <div class="abar-stat">☁️ Cloud-free scenes: <span class="abar-val" style="color:#0F6E56;">98.4%</span> <span class="abar-trend up">▲ 1.1%</span></div>
+  <div class="abar-stat">☁️ Cloud-free: <span class="abar-val" style="color:#0F6E56;">98.4%</span></div>
 </div>
 
 <!-- COMPARE BAR -->
 <div class="compare-bar" id="compare-bar">
   <span class="cmp-label">Compare:</span>
   <div class="cmp-slots">
-    <div class="cmp-slot" id="cmp-slot-0">Scene 1 <span style="color:#555">— select from grid</span></div>
-    <div class="cmp-slot" id="cmp-slot-1">Scene 2 <span style="color:#555">— select from grid</span></div>
+    <div class="cmp-slot" id="cmp-slot-0">Scene 1</div>
+    <div class="cmp-slot" id="cmp-slot-1">Scene 2</div>
   </div>
   <button class="cmp-btn" id="cmp-go-btn" onclick="openCompare()" disabled>COMPARE →</button>
   <button class="cmp-clear" onclick="clearCompare()">Clear</button>
@@ -264,12 +305,12 @@
   <span class="chip on" onclick="setChip(this,'all')">All</span>
   <span class="chip" onclick="setChip(this,'optical')">Optical</span>
   <span class="chip" onclick="setChip(this,'sar')">SAR</span>
-  <span class="chip" onclick="setChip(this,'multispectral')">Multispectral</span>
+  <span class="chip" onclick="setChip(this,'multispectral')">MS</span>
   <span class="chip" onclick="setChip(this,'thermal')">Thermal</span>
   <div class="res-filter-wrap">
     <span class="filter-label">Res:</span>
-    <span class="res-chip hr" id="rchip-hr" onclick="setResFilter('hr')">High-Res (≤1m)</span>
-    <span class="res-chip lr" id="rchip-lr" onclick="setResFilter('lr')">Low-Res (&gt;1m)</span>
+    <span class="res-chip hr" id="rchip-hr" onclick="setResFilter('hr')">≤1m HR</span>
+    <span class="res-chip lr" id="rchip-lr" onclick="setResFilter('lr')">&gt;1m LR</span>
     <span class="res-chip all-r on" id="rchip-all" onclick="setResFilter('all')">All</span>
   </div>
 </div>
@@ -287,8 +328,8 @@
         <option value="newest">Newest First</option>
         <option value="price-asc">Price: Low–High</option>
         <option value="price-desc">Price: High–Low</option>
-        <option value="res-asc">Resolution: Best First</option>
-        <option value="res-desc">Resolution: Lowest First</option>
+        <option value="res-asc">Resolution: Best</option>
+        <option value="res-desc">Resolution: Lowest</option>
       </select>
     </div>
   </div>
@@ -298,7 +339,7 @@
 <!-- WISHLIST PANEL -->
 <div class="wishlist-panel" id="wl-panel">
   <div class="wl-hdr"><span class="wl-ttl">♡ Wishlist</span><button class="wl-x" onclick="toggleWishlist()">×</button></div>
-  <div class="wl-body" id="wl-body"><div class="wl-empty">No scenes saved yet.<br>Click ♡ on any scene to save it.</div></div>
+  <div class="wl-body" id="wl-body"><div class="wl-empty">No scenes saved yet.<br>Click ♡ on any scene.</div></div>
   <div class="wl-foot" id="wl-foot" style="display:none;">
     <button class="wl-add-all" onclick="addAllWishToCart()">ADD ALL TO CART</button>
   </div>
@@ -326,7 +367,7 @@
       <span class="cmp-modal-ttl">Scene Comparison</span>
       <button class="cmp-modal-x" onclick="closeModal('cmp-modal')">×</button>
     </div>
-    <div id="cmp-modal-body"></div>
+    <div id="cmp-modal-body" style="overflow-x:auto;"></div>
   </div>
 </div>
 
@@ -399,6 +440,14 @@
 
 <script src="shared.js"></script>
 <script>
+// Mobile nav
+function toggleMobileNav(){
+  const drawer=document.getElementById('nav-mobile-drawer');
+  const btn=document.getElementById('nav-hamburger');
+  drawer.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
 const DATA=[
   {id:1,  name:'Kuala Lumpur City Centre',     loc:'Wilayah Persekutuan', type:'optical',       res:0.5,  resCm:50,  date:'2024-11-15', bands:'RGB',    price:850,  img:'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=700&q=80'},
   {id:2,  name:'Penang Island Overview',        loc:'Pulau Pinang',        type:'multispectral', res:1.0,  resCm:100, date:'2024-10-22', bands:'8-Band', price:1200, img:'https://images.unsplash.com/photo-1598935888738-cd2622bcd437?w=700&q=80'},
@@ -415,75 +464,43 @@ const DATA=[
 ];
 
 let activeF='all', resFilter='all', activePrev=null;
-let aiFiltered=null; // null = no AI filter, array = AI-filtered ids
+let aiFiltered=null;
 let compareList=[];
 let wishlist=JSON.parse(localStorage.getItem('uzma_wishlist')||'[]');
 
-// ── AI SEARCH ──────────────────────────────────────────────────────────
 function setQuery(q){document.getElementById('q').value=q;doAISearch();}
-function onSearchInput(){
-  // simple debounce — just show thinking on clear intent
-  const q=document.getElementById('q').value;
-  if(!q){clearAI();return;}
-}
+function onSearchInput(){const q=document.getElementById('q').value;if(!q){clearAI();return;}}
 
 async function doAISearch(){
   const q=document.getElementById('q').value.trim();
   if(!q){clearAI();return;}
-
-  // Check if query is simple keyword (no natural language) → normal filter
   const simpleKeywords=['optical','sar','multispectral','thermal','kuala lumpur','penang','selangor','johor','sabah','sarawak','pahang','perak','kedah','putrajaya'];
   const isSimple=simpleKeywords.some(k=>q.toLowerCase()===k||q.toLowerCase().includes(k)&&q.split(' ').length<=2);
-
   if(isSimple){doFilter();return;}
-
-  // Show AI thinking
   document.getElementById('ai-thinking').classList.add('show');
   document.getElementById('ai-result-label').classList.remove('show');
-
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
+    const response=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        model:"claude-sonnet-4-20250514",
-        max_tokens:1000,
-        messages:[{
-          role:"user",
-          content:`You are a satellite imagery search assistant for UZMA portal. 
-Given a user search query, return a JSON object with filter criteria to match scenes from this dataset:
+        model:"claude-sonnet-4-20250514",max_tokens:1000,
+        messages:[{role:"user",content:`You are a satellite imagery search assistant for UZMA portal. Given a user search query, return a JSON object with filter criteria to match scenes from this dataset:
 ${JSON.stringify(DATA.map(d=>({id:d.id,name:d.name,loc:d.loc,type:d.type,res:d.res,price:d.price,bands:d.bands})))}
-
 User query: "${q}"
-
-Return ONLY a raw JSON object (no markdown, no explanation) with these optional fields:
-{
-  "ids": [array of matching scene ids, most relevant first],
-  "reason": "short explanation of why these match (max 12 words)"
-}
-
-Match by: location names, type (optical/sar/multispectral/thermal), price constraints (under/below RM X), resolution (high-res=<=1m, low-res=>1m), use case keywords (flood=sar, vegetation/ndvi=multispectral, heat=thermal, city/urban=optical).`
-        }]
+Return ONLY a raw JSON object (no markdown) with: {"ids":[array of matching scene ids],"reason":"short explanation max 12 words"}`}]
       })
     });
     const data=await response.json();
     const text=data.content?.find(c=>c.type==='text')?.text||'';
-    const clean=text.replace(/```json|```/g,'').trim();
-    const parsed=JSON.parse(clean);
-
+    const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
     aiFiltered=parsed.ids||null;
     document.getElementById('ai-thinking').classList.remove('show');
     if(aiFiltered&&aiFiltered.length){
       document.getElementById('ai-result-label').classList.add('show');
-      // Show AI reason as toast
-      if(parsed.reason) showToast('🤖 '+parsed.reason);
+      if(parsed.reason)showToast('🤖 '+parsed.reason);
     }
     doFilter();
-  } catch(e){
-    document.getElementById('ai-thinking').classList.remove('show');
-    // Fallback to normal search
-    doFilter();
-  }
+  }catch(e){document.getElementById('ai-thinking').classList.remove('show');doFilter();}
 }
 
 function clearAI(){
@@ -493,17 +510,11 @@ function clearAI(){
   doFilter();
 }
 
-// ── COMPARE ──────────────────────────────────────────────────────────
 function toggleCompare(id){
   const idx=compareList.indexOf(id);
-  if(idx>=0){
-    compareList.splice(idx,1);
-  } else {
-    if(compareList.length>=2){showToast('Max 2 scenes to compare');return;}
-    compareList.push(id);
-  }
-  updateCompareBar();
-  doFilter(); // re-render to update button states
+  if(idx>=0){compareList.splice(idx,1);}
+  else{if(compareList.length>=2){showToast('Max 2 scenes to compare');return;}compareList.push(id);}
+  updateCompareBar();doFilter();
 }
 
 function updateCompareBar(){
@@ -513,13 +524,8 @@ function updateCompareBar(){
   [0,1].forEach(i=>{
     const slot=document.getElementById('cmp-slot-'+i);
     const scene=DATA.find(d=>d.id===compareList[i]);
-    if(scene){
-      slot.className='cmp-slot filled';
-      slot.innerHTML=`${scene.name} <button class="cmp-slot-x" onclick="toggleCompare(${scene.id})">×</button>`;
-    } else {
-      slot.className='cmp-slot';
-      slot.innerHTML=`Scene ${i+1} <span style="color:#555">— select from grid</span>`;
-    }
+    if(scene){slot.className='cmp-slot filled';slot.innerHTML=`${scene.name.split(' ').slice(0,2).join(' ')} <button class="cmp-slot-x" onclick="toggleCompare(${scene.id})">×</button>`;}
+    else{slot.className='cmp-slot';slot.innerHTML=`Scene ${i+1}`;}
   });
   go.disabled=compareList.length<2;
 }
@@ -527,15 +533,11 @@ function updateCompareBar(){
 function clearCompare(){compareList=[];updateCompareBar();doFilter();}
 
 function openCompare(){
-  if(compareList.length<2) return;
+  if(compareList.length<2)return;
   const [a,b]=compareList.map(id=>DATA.find(d=>d.id===id));
-  const win=(fieldA,fieldB,lowerBetter=false)=>{
-    if(fieldA===fieldB) return ['',''];
-    const aWins=lowerBetter?fieldA<fieldB:fieldA>fieldB;
-    return aWins?['cmp-win','']:['','cmp-win'];
-  };
-  const [rwa,rwb]=win(a.res,b.res,true); // lower res = better
-  const [pwa,pwb]=win(a.price,b.price,true); // lower price = better
+  const win=(fA,fB,lb=false)=>{if(fA===fB)return['',''];const aw=lb?fA<fB:fA>fB;return aw?['cmp-win','']:['','cmp-win'];};
+  const [rwa,rwb]=win(a.res,b.res,true);
+  const [pwa,pwb]=win(a.price,b.price,true);
   document.getElementById('cmp-modal-body').innerHTML=`
     <table class="cmp-table">
       <thead><tr><th>Attribute</th><th>${a.name}</th><th>${b.name}</th></tr></thead>
@@ -543,102 +545,78 @@ function openCompare(){
         <tr><td colspan="3" style="padding:0"><img src="${a.img}" class="cmp-img" style="width:50%;display:inline-block"><img src="${b.img}" class="cmp-img" style="width:50%;display:inline-block"></td></tr>
         <tr><td class="row-label">Location</td><td>${a.loc}</td><td>${b.loc}</td></tr>
         <tr><td class="row-label">Type</td><td>${a.type.toUpperCase()}</td><td>${b.type.toUpperCase()}</td></tr>
-        <tr><td class="row-label">Resolution</td><td class="${rwa}">${a.resCm} cm/pixel</td><td class="${rwb}">${b.resCm} cm/pixel</td></tr>
+        <tr><td class="row-label">Resolution</td><td class="${rwa}">${a.resCm} cm</td><td class="${rwb}">${b.resCm} cm</td></tr>
         <tr><td class="row-label">Bands</td><td>${a.bands}</td><td>${b.bands}</td></tr>
-        <tr><td class="row-label">Capture Date</td><td>${a.date}</td><td>${b.date}</td></tr>
+        <tr><td class="row-label">Date</td><td>${a.date}</td><td>${b.date}</td></tr>
         <tr><td class="row-label">Price</td><td class="${pwa}">RM ${a.price.toLocaleString()}</td><td class="${pwb}">RM ${b.price.toLocaleString()}</td></tr>
         <tr><td class="row-label">Action</td>
-          <td><button class="add-btn${cartHas(a.id)?' added':''}" onclick="handleAdd(${a.id})">${cartHas(a.id)?'✓ ADDED':'ADD TO CART'}</button></td>
-          <td><button class="add-btn${cartHas(b.id)?' added':''}" onclick="handleAdd(${b.id})">${cartHas(b.id)?'✓ ADDED':'ADD TO CART'}</button></td>
+          <td><button class="add-btn${cartHas(a.id)?' added':''}" onclick="handleAdd(${a.id})">${cartHas(a.id)?'✓ ADDED':'ADD'}</button></td>
+          <td><button class="add-btn${cartHas(b.id)?' added':''}" onclick="handleAdd(${b.id})">${cartHas(b.id)?'✓ ADDED':'ADD'}</button></td>
         </tr>
       </tbody>
     </table>`;
   document.getElementById('cmp-modal').classList.add('open');
 }
 
-// ── WISHLIST ──────────────────────────────────────────────────────────
 function toggleWishlistItem(id){
   const idx=wishlist.indexOf(id);
   if(idx>=0){wishlist.splice(idx,1);showToast('Removed from wishlist');}
   else{wishlist.push(id);showToast('♡ Added to wishlist');}
   localStorage.setItem('uzma_wishlist',JSON.stringify(wishlist));
-  updateWishlistPanel();
-  doFilter();
+  updateWishlistPanel();doFilter();
 }
 
 function updateWishlistPanel(){
   const count=wishlist.length;
   const el=document.getElementById('wl-count');
-  el.textContent=count;
-  el.classList.toggle('show',count>0);
+  el.textContent=count;el.classList.toggle('show',count>0);
   const body=document.getElementById('wl-body');
   const foot=document.getElementById('wl-foot');
-  if(!count){
-    body.innerHTML='<div class="wl-empty">No scenes saved yet.<br>Click ♡ on any scene.</div>';
-    foot.style.display='none';
-    return;
-  }
+  if(!count){body.innerHTML='<div class="wl-empty">No scenes saved yet.<br>Click ♡ on any scene.</div>';foot.style.display='none';return;}
   foot.style.display='block';
   body.innerHTML=wishlist.map(id=>{
-    const r=DATA.find(d=>d.id===id);
-    if(!r) return '';
-    return `<div class="wl-item">
-      <img class="wl-item-img" src="${r.img}" alt="${r.name}">
-      <div class="wl-item-info">
-        <div class="wl-item-name">${r.name}</div>
-        <div class="wl-item-price">RM ${r.price.toLocaleString()}</div>
-      </div>
-      <button class="wl-item-rm" onclick="toggleWishlistItem(${r.id})">×</button>
-    </div>`;
+    const r=DATA.find(d=>d.id===id);if(!r)return'';
+    return`<div class="wl-item"><img class="wl-item-img" src="${r.img}" alt="${r.name}"><div class="wl-item-info"><div class="wl-item-name">${r.name}</div><div class="wl-item-price">RM ${r.price.toLocaleString()}</div></div><button class="wl-item-rm" onclick="toggleWishlistItem(${r.id})">×</button></div>`;
   }).join('');
 }
 
 function toggleWishlist(){document.getElementById('wl-panel').classList.toggle('open');}
+function addAllWishToCart(){wishlist.forEach(id=>{const r=DATA.find(d=>d.id===id);if(r)addCart(r);});showToast('All wishlist items added to cart');toggleWishlist();}
 
-function addAllWishToCart(){
-  wishlist.forEach(id=>{const r=DATA.find(d=>d.id===id);if(r)addCart(r);});
-  showToast('All wishlist items added to cart');
-  toggleWishlist();
-}
-
-// ── RENDER & FILTER ──────────────────────────────────────────────────
 function resLabel(r){
-  if(r.res<=0.5) return 'ULTRA-HD';
-  if(r.res<=1.0) return 'HIGH-RES';
-  if(r.res<=2.0) return 'MEDIUM';
-  return 'LOW-RES';
+  if(r.res<=0.5)return'ULTRA-HD';
+  if(r.res<=1.0)return'HIGH-RES';
+  if(r.res<=2.0)return'MEDIUM';
+  return'LOW-RES';
 }
 
 function renderGrid(d){
   document.getElementById('rnum').textContent=d.length;
-  if(!d.length){
-    document.getElementById('grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--gray-muted);">No images match your filters.</div>';
-    return;
-  }
-  document.getElementById('grid').innerHTML=d.map((r,i)=>{
-    const hr=r.res<=1.0, rl=resLabel(r);
+  if(!d.length){document.getElementById('grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--gray-muted);">No images match your filters.</div>';return;}
+  document.getElementById('grid').innerHTML=d.map((r)=>{
+    const hr=r.res<=1.0,rl=resLabel(r);
     const inWish=wishlist.includes(r.id);
     const inCmp=compareList.includes(r.id);
     const aiOrder=aiFiltered?aiFiltered.indexOf(r.id):-1;
-    return `<div class="card ${hr?'high-res':'low-res'}${inWish?' wishlisted':''}">
+    return`<div class="card ${hr?'high-res':'low-res'}${inWish?' wishlisted':''}">
       <div class="img-wrap">
         <img src="${r.img}" alt="${r.name}" loading="lazy" draggable="false">
         <div class="locked-overlay">
           <div class="lock-ring"><svg viewBox="0 0 24 24"><path d="M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2z"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
           <span class="locked-label">Licensed Content</span>
-          <button class="prev-btn" onclick="openPreview(${r.id})">Preview Image</button>
+          <button class="prev-btn" onclick="openPreview(${r.id})">Preview</button>
         </div>
         <span class="badge-res ${hr?'hr':'lr'}">${r.resCm}cm · ${rl}</span>
-        <span class="badge-cm">${r.resCm} cm/pixel</span>
-        ${aiFiltered&&aiOrder>=0?`<span class="ai-match">#${aiOrder+1} AI MATCH</span>`:''}
+        <span class="badge-cm">${r.resCm} cm/px</span>
+        ${aiFiltered&&aiOrder>=0?`<span class="ai-match">#${aiOrder+1} AI</span>`:''}
         <div class="card-actions">
-          <button class="ca-btn ca-wish${inWish?' on':''}" onclick="toggleWishlistItem(${r.id})" title="Save to wishlist">${inWish?'♥':'♡'}</button>
-          <button class="ca-btn ca-cmp${inCmp?' on':''}" onclick="toggleCompare(${r.id})" title="Add to compare">⚖</button>
+          <button class="ca-btn ca-wish${inWish?' on':''}" onclick="toggleWishlistItem(${r.id})" title="Wishlist">${inWish?'♥':'♡'}</button>
+          <button class="ca-btn ca-cmp${inCmp?' on':''}" onclick="toggleCompare(${r.id})" title="Compare">⚖</button>
         </div>
       </div>
       <div class="card-body">
         <div class="card-name">${r.name}</div>
-        <div class="card-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${r.loc}, Malaysia</div>
+        <div class="card-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>${r.loc}</div>
         <div class="tags">
           <span class="tag ${hr?'hr-tag':'lr-tag'}">${rl}</span>
           <span class="tag">${r.type.toUpperCase()}</span>
@@ -646,8 +624,8 @@ function renderGrid(d){
           <span class="tag">${r.date}</span>
         </div>
         <div class="card-foot">
-          <div><div class="price">RM ${r.price.toLocaleString()}</div><div class="price-note">per scene · GeoTIFF</div></div>
-          <button class="add-btn${cartHas(r.id)?' added':''}" id="btn-${r.id}" onclick="handleAdd(${r.id})">${cartHas(r.id)?'✓ ADDED':'ADD TO CART'}</button>
+          <div><div class="price">RM ${r.price.toLocaleString()}</div><div class="price-note">per scene</div></div>
+          <button class="add-btn${cartHas(r.id)?' added':''}" id="btn-${r.id}" onclick="handleAdd(${r.id})">${cartHas(r.id)?'✓':'ADD'}</button>
         </div>
       </div>
     </div>`;
@@ -658,8 +636,8 @@ function handleAdd(id){
   const item=DATA.find(x=>x.id===id);
   if(addCart(item)){
     const btn=document.getElementById('btn-'+id);
-    if(btn){btn.textContent='✓ ADDED';btn.classList.add('added');}
-    if(activePrev&&activePrev.id===id) document.getElementById('pm-add').textContent='✓ ADDED TO CART';
+    if(btn){btn.textContent='✓';btn.classList.add('added');}
+    if(activePrev&&activePrev.id===id)document.getElementById('pm-add').textContent='✓ ADDED TO CART';
   }
 }
 
@@ -667,21 +645,18 @@ function doFilter(){
   const q=document.getElementById('q').value.toLowerCase();
   const sv=document.getElementById('sort-select').value;
   let d=[...DATA];
-
-  // AI filter takes precedence if active
-  if(aiFiltered){
-    d=aiFiltered.map(id=>DATA.find(x=>x.id===id)).filter(Boolean);
-  } else {
-    if(activeF!=='all') d=d.filter(r=>r.type===activeF);
-    if(resFilter==='hr') d=d.filter(r=>r.res<=1.0);
-    if(resFilter==='lr') d=d.filter(r=>r.res>1.0);
-    if(q) d=d.filter(r=>r.name.toLowerCase().includes(q)||r.loc.toLowerCase().includes(q));
+  if(aiFiltered){d=aiFiltered.map(id=>DATA.find(x=>x.id===id)).filter(Boolean);}
+  else{
+    if(activeF!=='all')d=d.filter(r=>r.type===activeF);
+    if(resFilter==='hr')d=d.filter(r=>r.res<=1.0);
+    if(resFilter==='lr')d=d.filter(r=>r.res>1.0);
+    if(q)d=d.filter(r=>r.name.toLowerCase().includes(q)||r.loc.toLowerCase().includes(q));
     d.sort((a,b)=>{
-      if(sv==='newest')     return new Date(b.date)-new Date(a.date);
-      if(sv==='price-asc')  return a.price-b.price;
-      if(sv==='price-desc') return b.price-a.price;
-      if(sv==='res-asc')    return a.res-b.res;
-      if(sv==='res-desc')   return b.res-a.res;
+      if(sv==='newest')return new Date(b.date)-new Date(a.date);
+      if(sv==='price-asc')return a.price-b.price;
+      if(sv==='price-desc')return b.price-a.price;
+      if(sv==='res-asc')return a.res-b.res;
+      if(sv==='res-desc')return b.res-a.res;
       return 0;
     });
   }
@@ -689,9 +664,9 @@ function doFilter(){
 }
 
 function setChip(el,f){
-  if(aiFiltered) clearAI();
+  if(aiFiltered)clearAI();
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
-  el.classList.add('on'); activeF=f; doFilter();
+  el.classList.add('on');activeF=f;doFilter();
 }
 function setResFilter(f){
   resFilter=f;
@@ -700,28 +675,25 @@ function setResFilter(f){
 }
 
 function openPreview(id){
-  const r=DATA.find(x=>x.id===id); activePrev=r;
+  const r=DATA.find(x=>x.id===id);activePrev=r;
   document.getElementById('pm-ttl').textContent=r.name;
   document.getElementById('pm-img').src=r.img;
   document.getElementById('pm-price').textContent=`RM ${r.price.toLocaleString()}`;
   document.getElementById('pm-tags').innerHTML=
     `<span class="modal-tag">${r.type.toUpperCase()}</span>
-     <span class="modal-tag">${r.resCm} cm/pixel</span>
+     <span class="modal-tag">${r.resCm} cm/px</span>
      <span class="modal-tag">${resLabel(r)}</span>
      <span class="modal-tag">${r.bands}</span>
      <span class="modal-tag">${r.date}</span>
-     <span class="modal-tag">${r.loc}, Malaysia</span>`;
+     <span class="modal-tag">${r.loc}</span>`;
   const btn=document.getElementById('pm-add');
   btn.textContent=cartHas(id)?'✓ ADDED TO CART':'ADD TO CART';
   btn.onclick=()=>handleAdd(id);
   document.getElementById('pm').classList.add('open');
 }
 
-// Init
 updateWishlistPanel();
 doFilter();
-
-// Image protection
 document.addEventListener('contextmenu',e=>{if(e.target.tagName==='IMG')e.preventDefault();});
 document.addEventListener('dragstart',e=>{if(e.target.tagName==='IMG')e.preventDefault();});
 </script>
