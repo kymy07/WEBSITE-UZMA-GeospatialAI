@@ -3,125 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>API Docs — UZMA Satellite Portal</title>
+<title>API Docs — UZMA Geospatial AI Platform</title>
 <link rel="stylesheet" href="shared.css">
 <style>
-.docs-wrap{display:flex;min-height:calc(100vh - 62px);}
-.docs-sidebar{width:220px;background:#fff;border-right:1px solid var(--gray-line);padding:1.2rem 0;flex-shrink:0;position:sticky;top:62px;height:calc(100vh - 62px);overflow-y:auto;}
-.docs-sidebar-section{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray-muted);padding:0 16px 6px;margin-top:14px;}
-.docs-sidebar-link{display:block;padding:7px 16px;font-size:12px;color:var(--gray-mid);cursor:pointer;transition:all .18s;border-left:3px solid transparent;}
+.docs-wrap{display:flex;min-height:calc(100vh - 68px);}
+.docs-sidebar{width:235px;background:#fff;border-right:1px solid var(--gray-line);padding:1.2rem 0;flex-shrink:0;position:sticky;top:68px;height:calc(100vh - 68px);overflow-y:auto;}
+.docs-sidebar-section{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray-muted);padding:0 18px 6px;margin-top:16px;font-family:'Inter',sans-serif;}
+.docs-sidebar-link{display:block;padding:7px 18px;font-size:12px;color:var(--gray-mid);cursor:pointer;transition:all .18s;border-left:2px solid transparent;font-family:'Inter',sans-serif;}
 .docs-sidebar-link:hover{color:var(--gray-dark);background:var(--gray-bg);}
-.docs-sidebar-link.on{color:var(--orange);background:var(--orange-pale);border-left-color:var(--orange);font-weight:600;}
-.docs-content{flex:1;padding:1.5rem;max-width:760px;min-width:0;}
-.docs-section{margin-bottom:2rem;}
-.docs-section h2{font-size:19px;font-weight:800;color:var(--gray-dark);margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:2px solid var(--orange);}
-.docs-section h3{font-size:13px;font-weight:700;color:var(--gray-dark);margin:1rem 0 .4rem;}
-.docs-section p{font-size:13px;color:var(--gray-mid);line-height:1.7;margin-bottom:.7rem;}
-.code-block{background:#1A1A1A;border-radius:8px;padding:.9rem 1rem;margin:.6rem 0;overflow-x:auto;border:1px solid #333;-webkit-overflow-scrolling:touch;}
-.code-block pre{font-family:'Courier New',monospace;font-size:12px;color:#CCC;line-height:1.7;white-space:pre;}
-.k{color:#E86A1A;}.s{color:#9FE1CB;}.n{color:#7F77DD;}.cm{color:#666;font-style:italic;}
-.endpoint-badge{display:inline-flex;align-items:center;gap:8px;background:#1A1A1A;border:1px solid #333;border-radius:6px;padding:7px 12px;margin:.5rem 0;}
-.method{font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 7px;border-radius:3px;}
+.docs-sidebar-link.on{color:var(--orange);background:#FFF8F5;border-left-color:var(--orange);font-weight:600;}
+.docs-content{flex:1;padding:2rem 2.5rem;max-width:840px;min-width:0;}
+
+.docs-section{margin-bottom:2.5rem;}
+.docs-section h2{
+  font-family:'Rajdhani',sans-serif;
+  font-size:22px;font-weight:700;
+  color:var(--gray-dark);
+  margin-bottom:.7rem;
+  padding-bottom:.5rem;
+  border-bottom:2px solid var(--orange);
+  letter-spacing:2px;text-transform:uppercase;
+}
+.docs-section h3{font-size:11px;font-weight:700;color:var(--gray-dark);margin:1.4rem 0 .5rem;letter-spacing:1.5px;text-transform:uppercase;}
+.docs-section p{font-size:13px;color:var(--gray-mid);line-height:1.8;margin-bottom:.8rem;}
+
+/* Code blocks */
+.code-block{background:#1A1A1A;border-radius:6px;padding:1rem 1.2rem;margin:.8rem 0;overflow-x:auto;border:1px solid #2A2A2A;}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:12px;color:#CCC;line-height:1.75;white-space:pre;}
+.k{color:#E86A1A;}.s{color:#9FE1CB;}.n{color:#7F77DD;}.cm{color:#555;font-style:italic;}
+
+/* Snippet tabs */
+.snippet-gen{background:#1A1A1A;border-radius:6px;border:1px solid #2A2A2A;margin:.8rem 0;overflow:hidden;}
+.snippet-tabs{display:flex;border-bottom:1px solid #2A2A2A;overflow-x:auto;scrollbar-width:none;}
+.snippet-tabs::-webkit-scrollbar{display:none;}
+.snippet-tab{padding:9px 16px;font-size:10px;font-weight:700;color:#555;cursor:pointer;transition:all .18s;letter-spacing:1.5px;border-right:1px solid #2A2A2A;white-space:nowrap;font-family:'Inter',sans-serif;text-transform:uppercase;}
+.snippet-tab:last-child{border-right:none;}
+.snippet-tab:hover{color:#ccc;background:#1E1E1E;}
+.snippet-tab.on{color:var(--orange);background:rgba(212,84,10,.08);}
+.snippet-content{display:none;padding:1rem 1.2rem;position:relative;}
+.snippet-content.on{display:block;}
+.snippet-copy{position:absolute;top:10px;right:10px;background:#2A2A2A;border:none;color:#666;font-size:9px;font-weight:700;padding:4px 9px;border-radius:3px;cursor:pointer;letter-spacing:1.5px;transition:all .18s;font-family:'Inter',sans-serif;text-transform:uppercase;}
+.snippet-copy:hover{background:var(--orange);color:#fff;}
+.snippet-copy.copied{background:#0F6E56;color:#fff;}
+pre.snippet{font-family:'JetBrains Mono',monospace;font-size:12px;color:#CCC;line-height:1.75;white-space:pre;margin:0;overflow-x:auto;}
+
+/* Endpoint badge */
+.endpoint-badge{display:inline-flex;align-items:center;gap:10px;background:#1A1A1A;border:1px solid #2A2A2A;border-radius:5px;padding:9px 16px;margin:.6rem 0;}
+.method{font-size:9px;font-weight:800;letter-spacing:1.5px;padding:3px 9px;border-radius:3px;font-family:'Inter',sans-serif;}
 .method.get{background:#E1F5EE;color:#0F6E56;}
 .method.post{background:#FFF0E8;color:#C04008;}
-.endpoint-path{font-family:'Courier New',monospace;font-size:12px;color:#CCC;}
-.param-table{width:100%;border-collapse:collapse;font-size:12px;margin:.6rem 0;overflow-x:auto;display:block;}
-.param-table th{background:var(--gray-dark);color:#888;text-align:left;padding:7px 10px;font-size:9px;letter-spacing:1px;text-transform:uppercase;font-weight:700;}
-.param-table td{padding:7px 10px;border-bottom:1px solid var(--gray-card);color:var(--gray-mid);}
-.param-table td:first-child{font-family:'Courier New',monospace;color:var(--orange);font-size:11px;}
+.endpoint-path{font-family:'JetBrains Mono',monospace;font-size:13px;color:#CCC;}
+
+/* Param table */
+.param-table{width:100%;border-collapse:collapse;font-size:12px;margin:.8rem 0;overflow-x:auto;display:block;}
+.param-table th{background:#1A1A1A;color:#555;text-align:left;padding:9px 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;font-family:'Inter',sans-serif;}
+.param-table td{padding:9px 12px;border-bottom:1px solid var(--gray-card);color:var(--gray-mid);}
+.param-table td:first-child{font-family:'JetBrains Mono',monospace;color:var(--orange);font-size:11px;}
 .param-table tr:last-child td{border:none;}
-.req-badge{background:#FCEBEB;color:#A32D2D;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;margin-left:4px;}
-.opt-badge{background:var(--gray-card);color:var(--gray-muted);font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;margin-left:4px;}
+.req-badge{background:#FCEBEB;color:#A32D2D;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;margin-left:4px;font-family:'Inter',sans-serif;}
+.opt-badge{background:var(--gray-card);color:var(--gray-muted);font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;margin-left:4px;font-family:'Inter',sans-serif;}
+
+/* Callout */
+.callout{background:#FFF8F5;border:1px solid rgba(212,84,10,.2);border-left:3px solid var(--orange);border-radius:4px;padding:12px 16px;margin:.8rem 0;font-size:12px;color:var(--gray-mid);line-height:1.75;}
+.callout strong{color:var(--orange);}
 
 /* Mobile sidebar toggle */
-.docs-sidebar-toggle{display:none;background:var(--gray-dark);color:#fff;border:none;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;cursor:pointer;width:100%;text-align:left;border-bottom:1px solid #444;}
+.docs-sidebar-toggle{display:none;background:var(--gray-dark);color:#fff;border:none;padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:2px;cursor:pointer;width:100%;text-align:left;border-bottom:1px solid #2A2A2A;font-family:'Inter',sans-serif;text-transform:uppercase;}
 .docs-sidebar-toggle::after{content:' ▼';float:right;}
 .docs-sidebar-toggle.open::after{content:' ▲';}
 
-/* ===== SNIPPET GENERATOR ===== */
-.snippet-gen{background:#1A1A1A;border-radius:10px;border:1px solid #333;margin:.6rem 0;overflow:hidden;}
-.snippet-tabs{display:flex;border-bottom:1px solid #333;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-.snippet-tab{padding:7px 14px;font-size:10px;font-weight:700;color:#666;cursor:pointer;transition:all .18s;letter-spacing:1px;border-right:1px solid #333;white-space:nowrap;}
-.snippet-tab:last-child{border-right:none;}
-.snippet-tab:hover{color:#ccc;}
-.snippet-tab.on{color:var(--orange);background:rgba(212,84,10,.08);}
-.snippet-content{display:none;padding:.9rem 1rem;position:relative;}
-.snippet-content.on{display:block;}
-.snippet-copy{position:absolute;top:8px;right:8px;background:#333;border:none;color:#888;font-size:9px;font-weight:700;padding:4px 9px;border-radius:3px;cursor:pointer;letter-spacing:1px;transition:all .18s;}
-.snippet-copy:hover{background:var(--orange);color:#fff;}
-.snippet-copy.copied{background:#0F6E56;color:#fff;}
-pre.snippet{font-family:'Courier New',monospace;font-size:11px;color:#CCC;line-height:1.7;white-space:pre;margin:0;overflow-x:auto;}
+/* Response sample */
+.response-sample{background:#111;border-radius:6px;border:1px solid #2A2A2A;overflow:hidden;margin:.8rem 0;}
+.response-sample-hdr{background:#1A1A1A;padding:7px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #2A2A2A;}
+.rs-status{font-size:9px;font-weight:800;padding:2px 7px;border-radius:3px;font-family:'Inter',sans-serif;}
+.rs-ok{background:#E1F5EE;color:#0F6E56;}
+.rs-err{background:#FCEBEB;color:#A32D2D;}
+.rs-label{font-size:10px;color:#555;font-family:'JetBrains Mono',monospace;}
+.response-sample pre{font-family:'JetBrains Mono',monospace;font-size:12px;color:#CCC;line-height:1.75;padding:1rem 1.2rem;margin:0;overflow-x:auto;}
 
-/* ===== API PLAYGROUND ===== */
-.playground{background:#fff;border-radius:10px;border:1px solid var(--gray-line);overflow:hidden;margin:.6rem 0;}
-.pg-hdr{background:var(--gray-dark);padding:10px 16px;display:flex;align-items:center;gap:10px;}
-.pg-title{font-size:11px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;}
-.pg-live-badge{background:var(--orange);color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:3px;letter-spacing:1.5px;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
-.pg-body{padding:14px 16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.pg-left{display:flex;flex-direction:column;gap:10px;}
-.pg-section-title{font-size:9px;font-weight:700;color:var(--gray-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
-.pg-endpoint-select{border:1px solid var(--gray-line);padding:7px 10px;border-radius:4px;font-size:12px;color:var(--gray-dark);outline:none;width:100%;}
-.pg-endpoint-select:focus{border-color:var(--orange);}
-.pg-params{display:flex;flex-direction:column;gap:6px;}
-.pg-param-row{display:flex;align-items:center;gap:6px;}
-.pg-param-key{font-family:'Courier New',monospace;font-size:10px;color:var(--orange);width:90px;flex-shrink:0;}
-.pg-param-val{flex:1;border:1px solid var(--gray-line);padding:6px 8px;border-radius:4px;font-size:11px;color:var(--gray-dark);outline:none;min-width:0;}
-.pg-param-val:focus{border-color:var(--orange);}
-.pg-send{background:var(--orange);color:#fff;border:none;padding:10px;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:1.5px;cursor:pointer;transition:background .2s;width:100%;}
-.pg-send:hover{background:var(--orange-light);}
-.pg-send:disabled{background:#ccc;cursor:not-allowed;}
-.pg-right{display:flex;flex-direction:column;}
-.pg-response{background:#1A1A1A;border-radius:6px;flex:1;min-height:180px;padding:10px;overflow:auto;position:relative;}
-.pg-response pre{font-family:'Courier New',monospace;font-size:10px;color:#CCC;line-height:1.6;white-space:pre-wrap;margin:0;}
-.pg-status{font-size:10px;font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
-.pg-status-dot{width:7px;height:7px;border-radius:50%;}
-.pg-status-dot.ok{background:#0F6E56;}
-.pg-status-dot.err{background:#E24B4A;}
-.pg-status-dot.idle{background:#888;}
-.pg-loading{position:absolute;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;border-radius:6px;}
-.pg-loading.show{display:flex;}
-.ai-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:bounce .8s infinite;}
-.ai-dot:nth-child(2){animation-delay:.15s;}
-.ai-dot:nth-child(3){animation-delay:.3s;}
-@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
-.pg-note{font-size:10px;color:var(--gray-muted);padding:7px 14px;background:var(--gray-bg);border-top:1px solid var(--gray-line);}
-
-/* ===== REQUEST BUILDER ===== */
-.req-builder{background:#fff;border-radius:10px;border:1px solid var(--gray-line);overflow:hidden;margin:.6rem 0;}
-.rb-hdr{background:var(--gray-dark);padding:10px 16px;}
-.rb-title{font-size:11px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;}
-.rb-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px;}
-.rb-row{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;}
-.rb-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:130px;}
-.rb-field label{font-size:9px;font-weight:700;color:var(--gray-muted);letter-spacing:1.5px;text-transform:uppercase;}
-.rb-field input,.rb-field select{border:1px solid var(--gray-line);padding:7px 9px;border-radius:4px;font-size:12px;color:var(--gray-dark);outline:none;}
-.rb-field input:focus,.rb-field select:focus{border-color:var(--orange);}
-.rb-output{background:#1A1A1A;border-radius:6px;padding:10px;font-family:'Courier New',monospace;font-size:11px;color:#CCC;line-height:1.6;white-space:pre;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-.rb-gen-btn{background:var(--gray-dark);color:#fff;border:none;padding:9px 18px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1.5px;cursor:pointer;}
-.rb-gen-btn:hover{background:var(--orange);}
-
-/* ===== MOBILE ===== */
 @media(max-width:768px){
   .docs-sidebar{display:none;position:fixed;top:62px;left:0;right:0;z-index:90;height:auto;max-height:60vh;overflow-y:auto;border-right:none;border-bottom:1px solid var(--gray-line);}
   .docs-sidebar.mobile-open{display:block;}
   .docs-sidebar-toggle{display:block;}
   .docs-wrap{flex-direction:column;}
-  .docs-content{padding:1rem .9rem;}
-  .pg-body{grid-template-columns:1fr;}
-  .pg-response{min-height:140px;}
-}
-@media(max-width:480px){
-  .docs-section h2{font-size:16px;}
-  .endpoint-badge{flex-wrap:wrap;gap:6px;}
-  .param-table{font-size:11px;}
+  .docs-content{padding:1.2rem 1rem;}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="marketplace.html"><img class="logo-img" src="LogoUzma.png" alt="UZMA"></a>
+  <a class="nav-brand" href="marketplace.html">
+    <img class="logo-img" src="LogoUzma.png" alt="UZMA">
+    <div class="nav-brand-divider"></div>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">UZMA</span>
+      <span class="nav-brand-sub">Geospatial AI Platform</span>
+    </div>
+  </a>
   <div class="nav-links">
     <a class="nav-link" href="marketplace.html">Marketplace</a>
     <a class="nav-link" href="products.html">Products</a>
@@ -143,17 +122,13 @@ pre.snippet{font-family:'Courier New',monospace;font-size:11px;color:#CCC;line-h
 
 <div class="toast" id="toast"></div>
 
-<!-- Mobile sidebar toggle -->
-<button class="docs-sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">📖 Documentation Menu</button>
+<button class="docs-sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">📖 Documentation</button>
 
 <div class="docs-wrap">
   <div class="docs-sidebar" id="docs-sidebar">
     <div class="docs-sidebar-section">Getting Started</div>
     <div class="docs-sidebar-link on" onclick="scrollDoc('doc-intro',this)">Introduction</div>
     <div class="docs-sidebar-link" onclick="scrollDoc('doc-auth-hdr',this)">Authentication</div>
-    <div class="docs-sidebar-section">Interactive Tools</div>
-    <div class="docs-sidebar-link" onclick="scrollDoc('doc-playground',this)">▶ API Playground</div>
-    <div class="docs-sidebar-link" onclick="scrollDoc('doc-builder',this)">⚙ Request Builder</div>
     <div class="docs-sidebar-section">Endpoints</div>
     <div class="docs-sidebar-link" onclick="scrollDoc('doc-images',this)">GET /images</div>
     <div class="docs-sidebar-link" onclick="scrollDoc('doc-preview',this)">GET /preview</div>
@@ -163,151 +138,104 @@ pre.snippet{font-family:'Courier New',monospace;font-size:11px;color:#CCC;line-h
     <div class="docs-sidebar-section">Reference</div>
     <div class="docs-sidebar-link" onclick="scrollDoc('doc-errors',this)">Error Codes</div>
     <div class="docs-sidebar-link" onclick="scrollDoc('doc-rate',this)">Rate Limits</div>
+    <div class="docs-sidebar-link" onclick="scrollDoc('doc-webhooks',this)">Webhooks</div>
   </div>
 
   <div class="docs-content">
 
     <div class="docs-section" id="doc-intro">
       <h2>Introduction</h2>
-      <p>The UZMA Satellite Imagery API provides programmatic access to our archive of high-resolution Earth observation data. All requests go to:</p>
-      <div class="code-block"><pre><span class="k">Base URL:</span>  <span class="s">https://api.uzma.com.my/v1</span>
-<span class="k">Format:</span>    <span class="s">application/json</span>
-<span class="k">Dates:</span>     <span class="s">ISO 8601  (YYYY-MM-DD)</span>
-<span class="k">Currency:</span>  <span class="s">Malaysian Ringgit (MYR)</span></pre></div>
+      <p>The UZMA Satellite Imagery API provides programmatic access to our archive of high-resolution Earth observation data covering Malaysia and surrounding regions. All responses are JSON; dates use ISO 8601; currency is Malaysian Ringgit (MYR).</p>
+      <div class="code-block"><pre><span class="k">Base URL:  </span><span class="s">https://api.uzma.com.my/v1</span>
+<span class="k">Format:    </span><span class="s">application/json</span>
+<span class="k">Dates:     </span><span class="s">ISO 8601  (YYYY-MM-DD)</span>
+<span class="k">Currency:  </span><span class="s">Malaysian Ringgit (MYR)</span></pre></div>
+      <div class="callout"><strong>Quick Start:</strong> Public endpoints (search, preview) require no authentication. For ordering and downloads, obtain a JWT token via <code>POST /auth</code>.</div>
     </div>
 
     <div class="docs-section" id="doc-auth-hdr">
       <h2>Authentication</h2>
-      <p>Public endpoints (search, preview) require no authentication. Protected endpoints (order, download) require a JWT bearer token from <code style="background:var(--gray-card);padding:2px 5px;border-radius:3px;font-size:11px;">POST /auth</code>. Tokens expire after 24 hours.</p>
-      <div class="code-block"><pre><span class="cm"># Attach to every protected request</span>
-<span class="k">Authorization:</span> <span class="s">Bearer &lt;your_jwt_token&gt;</span></pre></div>
-    </div>
-
-    <div class="docs-section" id="doc-playground">
-      <h2>▶ API Playground</h2>
-      <p>Test any endpoint live — simulated responses based on the UZMA API spec. No API key required.</p>
-      <div class="playground">
-        <div class="pg-hdr">
-          <span class="pg-title">Live Playground</span>
-          <span class="pg-live-badge">SIMULATED</span>
-        </div>
-        <div class="pg-body">
-          <div class="pg-left">
-            <div>
-              <div class="pg-section-title">Endpoint</div>
-              <select class="pg-endpoint-select" id="pg-endpoint" onchange="updatePGParams()">
-                <option value="GET /images">GET /v1/images</option>
-                <option value="GET /images/:id/preview">GET /v1/images/:id/preview</option>
-                <option value="POST /auth">POST /v1/auth</option>
-                <option value="GET /download/:token">GET /v1/download/:token</option>
-              </select>
-            </div>
-            <div>
-              <div class="pg-section-title">Parameters</div>
-              <div class="pg-params" id="pg-params"></div>
-            </div>
-            <button class="pg-send" id="pg-send" onclick="sendRequest()">▶ SEND REQUEST</button>
-          </div>
-          <div class="pg-right">
-            <div class="pg-status" id="pg-status">
-              <span class="pg-status-dot idle" id="pg-dot"></span>
-              <span id="pg-status-text">Ready</span>
-            </div>
-            <div class="pg-response" id="pg-response">
-              <pre id="pg-response-pre" style="color:#555;">// Response will appear here…</pre>
-              <div class="pg-loading" id="pg-loading">
-                <div style="display:flex;gap:6px;"><div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pg-note">⚠ Playground uses simulated responses. Real API keys required for production.</div>
-      </div>
-    </div>
-
-    <div class="docs-section" id="doc-builder">
-      <h2>⚙ Request Builder</h2>
-      <p>Fill in parameters and auto-generate ready-to-use code snippets.</p>
-      <div class="req-builder">
-        <div class="rb-hdr"><span class="rb-title">Request Builder</span></div>
-        <div class="rb-body">
-          <div class="rb-row">
-            <div class="rb-field">
-              <label>Endpoint</label>
-              <select id="rb-endpoint" onchange="buildRequest()">
-                <option value="images">GET /images</option>
-                <option value="preview">GET /images/:id/preview</option>
-                <option value="auth">POST /auth</option>
-                <option value="order">POST /order</option>
-              </select>
-            </div>
-            <div class="rb-field">
-              <label>Language</label>
-              <select id="rb-lang" onchange="buildRequest()">
-                <option value="curl">cURL</option>
-                <option value="python">Python</option>
-                <option value="js">JavaScript</option>
-                <option value="php">PHP</option>
-              </select>
-            </div>
-          </div>
-          <div id="rb-dynamic-fields" class="rb-row"></div>
-          <div class="rb-output" id="rb-output">// Configure above and click Generate</div>
-          <button class="rb-gen-btn" onclick="buildRequest()">GENERATE CODE</button>
-        </div>
-      </div>
+      <p>Protected endpoints require a JWT Bearer token from <code>POST /auth</code>. Tokens expire after 24 hours.</p>
+      <div class="code-block"><pre><span class="cm"># Include in all protected request headers</span>
+<span class="k">Authorization: </span><span class="s">Bearer &lt;your_jwt_token&gt;</span></pre></div>
+      <h3>Token Lifecycle</h3>
+      <p>Tokens are single-session and expire at 24 h. Store securely — never expose in client-side code or public repositories. Rotate access keys from your dashboard at <strong>uzma.com.my</strong>.</p>
     </div>
 
     <div class="docs-section" id="doc-images">
       <h2>GET /images</h2>
-      <p>Returns a paginated list of available satellite scenes.</p>
+      <p>Returns a paginated list of available satellite scenes. All parameters are optional.</p>
       <div class="endpoint-badge"><span class="method get">GET</span><span class="endpoint-path">/v1/images</span></div>
       <h3>Query Parameters</h3>
       <table class="param-table">
         <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
         <tr><td>search <span class="opt-badge">opt</span></td><td>string</td><td>Location name or keyword</td></tr>
-        <tr><td>type <span class="opt-badge">opt</span></td><td>string</td><td>optical, sar, multispectral, thermal</td></tr>
-        <tr><td>res_max <span class="opt-badge">opt</span></td><td>float</td><td>Max resolution in meters</td></tr>
+        <tr><td>type <span class="opt-badge">opt</span></td><td>string</td><td><code>optical</code> · <code>sar</code> · <code>multispectral</code> · <code>thermal</code></td></tr>
+        <tr><td>res_max <span class="opt-badge">opt</span></td><td>float</td><td>Max resolution in metres (e.g. <code>1.0</code>)</td></tr>
         <tr><td>date_from <span class="opt-badge">opt</span></td><td>date</td><td>YYYY-MM-DD</td></tr>
         <tr><td>date_to <span class="opt-badge">opt</span></td><td>date</td><td>YYYY-MM-DD</td></tr>
-        <tr><td>sort <span class="opt-badge">opt</span></td><td>string</td><td>newest, price_asc, price_desc, res_asc</td></tr>
-        <tr><td>limit <span class="opt-badge">opt</span></td><td>int</td><td>Default 20, max 100</td></tr>
+        <tr><td>price_max <span class="opt-badge">opt</span></td><td>int</td><td>Maximum price in MYR</td></tr>
+        <tr><td>sort <span class="opt-badge">opt</span></td><td>string</td><td><code>newest</code> · <code>price_asc</code> · <code>price_desc</code> · <code>res_asc</code></td></tr>
+        <tr><td>limit <span class="opt-badge">opt</span></td><td>int</td><td>Results per page. Default: <code>20</code>, max: <code>100</code></td></tr>
         <tr><td>offset <span class="opt-badge">opt</span></td><td>int</td><td>Pagination offset</td></tr>
       </table>
-      <h3>Code Snippets</h3>
+      <h3>Response</h3>
+      <div class="response-sample">
+        <div class="response-sample-hdr"><span class="rs-status rs-ok">200</span><span class="rs-label">application/json</span></div>
+        <pre>{
+  "total": 12,
+  "limit": 20,
+  "offset": 0,
+  "data": [
+    {
+      "id": "img_kl_20241115_opt",
+      "name": "Kuala Lumpur City Centre",
+      "type": "optical",
+      "resolution_m": 0.5,
+      "resolution_cm": 50,
+      "location": "Wilayah Persekutuan",
+      "bands": "RGB",
+      "date": "2024-11-15",
+      "price_myr": 850,
+      "preview_url": "https://cdn.uzma.com.my/previews/..."
+    }
+  ]
+}</pre>
+      </div>
+      <h3>Code Examples</h3>
       <div class="snippet-gen">
         <div class="snippet-tabs">
-          <div class="snippet-tab on" onclick="setSnippet('images','curl',this)">cURL</div>
-          <div class="snippet-tab" onclick="setSnippet('images','python',this)">Python</div>
-          <div class="snippet-tab" onclick="setSnippet('images','js',this)">JavaScript</div>
-          <div class="snippet-tab" onclick="setSnippet('images','php',this)">PHP</div>
+          <div class="snippet-tab on"  onclick="setSnippet('images','curl',this)">cURL</div>
+          <div class="snippet-tab"     onclick="setSnippet('images','python',this)">Python</div>
+          <div class="snippet-tab"     onclick="setSnippet('images','js',this)">JavaScript</div>
+          <div class="snippet-tab"     onclick="setSnippet('images','php',this)">PHP</div>
         </div>
         <div class="snippet-content on" id="snip-images-curl">
-          <button class="snippet-copy" onclick="copySnippet('snip-images-curl')">COPY</button>
+          <button class="snippet-copy" onclick="copySnippet('snip-images-curl')">Copy</button>
           <pre class="snippet">curl -X GET "https://api.uzma.com.my/v1/images?type=optical&res_max=1.0" \
   -H "Content-Type: application/json"</pre>
         </div>
         <div class="snippet-content" id="snip-images-python">
-          <button class="snippet-copy" onclick="copySnippet('snip-images-python')">COPY</button>
+          <button class="snippet-copy" onclick="copySnippet('snip-images-python')">Copy</button>
           <pre class="snippet">import requests
 
 response = requests.get(
     "https://api.uzma.com.my/v1/images",
-    params={"type": "optical", "res_max": 1.0}
+    params={"type": "optical", "res_max": 1.0, "limit": 20}
 )
 data = response.json()
-print(data["total"], "scenes found")</pre>
+print(f"{data['total']} scenes found")</pre>
         </div>
         <div class="snippet-content" id="snip-images-js">
-          <button class="snippet-copy" onclick="copySnippet('snip-images-js')">COPY</button>
+          <button class="snippet-copy" onclick="copySnippet('snip-images-js')">Copy</button>
           <pre class="snippet">const res = await fetch(
   "https://api.uzma.com.my/v1/images?type=optical&res_max=1.0"
 );
 const data = await res.json();
-console.log(data.total, "scenes found");</pre>
+console.log(`${data.total} scenes found`);</pre>
         </div>
         <div class="snippet-content" id="snip-images-php">
-          <button class="snippet-copy" onclick="copySnippet('snip-images-php')">COPY</button>
+          <button class="snippet-copy" onclick="copySnippet('snip-images-php')">Copy</button>
           <pre class="snippet">$response = file_get_contents(
   "https://api.uzma.com.my/v1/images?type=optical&res_max=1.0"
 );
@@ -319,35 +247,43 @@ echo $data['total'] . " scenes found";</pre>
 
     <div class="docs-section" id="doc-preview">
       <h2>GET /images/:id/preview</h2>
-      <p>Returns a blurred, watermarked preview. No auth required.</p>
+      <p>Returns a blurred, watermarked preview URL. No authentication required.</p>
       <div class="endpoint-badge"><span class="method get">GET</span><span class="endpoint-path">/v1/images/:id/preview</span></div>
-      <div class="code-block"><pre><span class="n">{</span>
-  <span class="k">"id"</span>: <span class="s">"img_kl_20241115_opt"</span>,
-  <span class="k">"preview_url"</span>: <span class="s">"https://cdn.uzma.com.my/previews/...blurred.jpg"</span>,
-  <span class="k">"watermarked"</span>: <span class="s">true</span>,
-  <span class="k">"resolution_cm"</span>: <span class="s">50</span>
-<span class="n">}</span></pre></div>
+      <div class="response-sample">
+        <div class="response-sample-hdr"><span class="rs-status rs-ok">200</span><span class="rs-label">application/json</span></div>
+        <pre>{
+  "id": "img_kl_20241115_opt",
+  "preview_url": "https://cdn.uzma.com.my/previews/img_kl_opt_blurred.jpg",
+  "watermarked": true,
+  "resolution_cm": 50
+}</pre>
+      </div>
     </div>
 
     <div class="docs-section" id="doc-auth">
       <h2>POST /auth</h2>
-      <p>Authenticates with email and API password. Returns a JWT token.</p>
+      <p>Authenticates and returns a JWT token valid for 24 hours.</p>
       <div class="endpoint-badge"><span class="method post">POST</span><span class="endpoint-path">/v1/auth</span></div>
-      <h3>Code Snippets</h3>
+      <h3>Request Body</h3>
+      <table class="param-table">
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td>email <span class="req-badge">req</span></td><td>string</td><td>Your UZMA account email</td></tr>
+        <tr><td>password <span class="req-badge">req</span></td><td>string</td><td>Your API access key</td></tr>
+      </table>
       <div class="snippet-gen">
         <div class="snippet-tabs">
           <div class="snippet-tab on" onclick="setSnippet('auth','curl',this)">cURL</div>
-          <div class="snippet-tab" onclick="setSnippet('auth','python',this)">Python</div>
-          <div class="snippet-tab" onclick="setSnippet('auth','js',this)">JavaScript</div>
+          <div class="snippet-tab"    onclick="setSnippet('auth','python',this)">Python</div>
+          <div class="snippet-tab"    onclick="setSnippet('auth','js',this)">JavaScript</div>
         </div>
         <div class="snippet-content on" id="snip-auth-curl">
-          <button class="snippet-copy" onclick="copySnippet('snip-auth-curl')">COPY</button>
+          <button class="snippet-copy" onclick="copySnippet('snip-auth-curl')">Copy</button>
           <pre class="snippet">curl -X POST "https://api.uzma.com.my/v1/auth" \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"your_api_key"}'</pre>
         </div>
         <div class="snippet-content" id="snip-auth-python">
-          <button class="snippet-copy" onclick="copySnippet('snip-auth-python')">COPY</button>
+          <button class="snippet-copy" onclick="copySnippet('snip-auth-python')">Copy</button>
           <pre class="snippet">import requests
 
 r = requests.post("https://api.uzma.com.my/v1/auth", json={
@@ -358,7 +294,7 @@ token = r.json()["token"]
 headers = {"Authorization": f"Bearer {token}"}</pre>
         </div>
         <div class="snippet-content" id="snip-auth-js">
-          <button class="snippet-copy" onclick="copySnippet('snip-auth-js')">COPY</button>
+          <button class="snippet-copy" onclick="copySnippet('snip-auth-js')">Copy</button>
           <pre class="snippet">const r = await fetch("https://api.uzma.com.my/v1/auth", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
@@ -371,58 +307,100 @@ const { token } = await r.json();</pre>
 
     <div class="docs-section" id="doc-order">
       <h2>POST /order</h2>
-      <p>Creates an order. Requires Bearer token. Returns signed download URLs.</p>
+      <p>Creates a purchase order. Requires Bearer token. Returns signed download URLs valid for 24 hours.</p>
       <div class="endpoint-badge"><span class="method post">POST</span><span class="endpoint-path">/v1/order</span></div>
-      <div class="code-block"><pre><span class="cm"># Request</span>
+      <h3>Request Body</h3>
+      <table class="param-table">
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td>items <span class="req-badge">req</span></td><td>array</td><td>Array of <code>{id}</code> objects</td></tr>
+        <tr><td>payment_method <span class="opt-badge">opt</span></td><td>string</td><td><code>quota</code> (default) · <code>invoice</code></td></tr>
+      </table>
+      <div class="code-block"><pre><span class="cm"># Request body</span>
 <span class="n">{</span>
   <span class="k">"items"</span>: [<span class="n">{</span> <span class="k">"id"</span>: <span class="s">"img_kl_20241115_opt"</span> <span class="n">}</span>],
   <span class="k">"payment_method"</span>: <span class="s">"quota"</span>
-<span class="n">}</span>
-
-<span class="cm"># Response</span>
-<span class="n">{</span>
-  <span class="k">"order_id"</span>: <span class="s">"ord_20241210_abc123"</span>,
-  <span class="k">"status"</span>: <span class="s">"completed"</span>,
-  <span class="k">"total_myr"</span>: <span class="s">850</span>,
-  <span class="k">"downloads"</span>: [<span class="n">{</span>
-    <span class="k">"download_url"</span>: <span class="s">"https://cdn.uzma.com.my/dl/signed_xyz"</span>,
-    <span class="k">"expires_at"</span>: <span class="s">"2024-12-11T10:00:00Z"</span>
-  <span class="n">}]</span>
 <span class="n">}</span></pre></div>
+      <div class="response-sample">
+        <div class="response-sample-hdr"><span class="rs-status rs-ok">200</span><span class="rs-label">application/json</span></div>
+        <pre>{
+  "order_id": "ord_20241210_abc123",
+  "status": "completed",
+  "total_myr": 850,
+  "downloads": [{
+    "image_id": "img_kl_20241115_opt",
+    "download_url": "https://cdn.uzma.com.my/dl/signed_xyz",
+    "expires_at": "2024-12-11T10:00:00Z"
+  }]
+}</pre>
+      </div>
     </div>
 
     <div class="docs-section" id="doc-download">
       <h2>GET /download/:token</h2>
-      <p>Downloads full-resolution GeoTIFF. Token is time-limited (24h) and single-use.</p>
+      <p>Downloads the full-resolution GeoTIFF. Tokens are single-use and expire after 24 hours.</p>
       <div class="endpoint-badge"><span class="method get">GET</span><span class="endpoint-path">/v1/download/:token</span></div>
-      <div class="code-block"><pre><span class="k">Content-Type:</span>        <span class="s">image/tiff</span>
-<span class="k">Content-Disposition:</span> <span class="s">attachment; filename="kl_20241115_0.5m.tif"</span></pre></div>
+      <div class="code-block"><pre><span class="k">Content-Type:        </span><span class="s">image/tiff</span>
+<span class="k">Content-Disposition: </span><span class="s">attachment; filename="kl_20241115_0.5m.tif"</span>
+<span class="k">Content-Length:      </span><span class="s">248123456</span></pre></div>
+      <div class="callout"><strong>Note:</strong> Download tokens are single-use and expire after 24 hours. Monitor the <code>expires_at</code> field from your order response and re-order to obtain a new token.</div>
     </div>
 
     <div class="docs-section" id="doc-errors">
       <h2>Error Codes</h2>
+      <p>All errors return a JSON body with <code>error</code> and <code>message</code> fields.</p>
       <table class="param-table">
-        <tr><th>Code</th><th>Status</th><th>Description</th></tr>
-        <tr><td>401</td><td>Unauthorized</td><td>Missing or invalid JWT token</td></tr>
+        <tr><th>HTTP</th><th>Status</th><th>Description</th></tr>
+        <tr><td>400</td><td>Bad Request</td><td>Invalid or missing parameters</td></tr>
+        <tr><td>401</td><td>Unauthorized</td><td>Missing or expired JWT token</td></tr>
         <tr><td>403</td><td>Forbidden</td><td>Insufficient permissions</td></tr>
-        <tr><td>404</td><td>Not Found</td><td>Image ID or token not found</td></tr>
-        <tr><td>410</td><td>Gone</td><td>Download token expired or used</td></tr>
+        <tr><td>404</td><td>Not Found</td><td>Image ID or token does not exist</td></tr>
+        <tr><td>410</td><td>Gone</td><td>Download token expired or already used</td></tr>
         <tr><td>429</td><td>Too Many Requests</td><td>Rate limit exceeded</td></tr>
-        <tr><td>500</td><td>Server Error</td><td>Retry after 30s</td></tr>
+        <tr><td>500</td><td>Server Error</td><td>Transient — retry after 30 s</td></tr>
       </table>
+      <div class="response-sample">
+        <div class="response-sample-hdr"><span class="rs-status rs-err">401</span><span class="rs-label">Error response format</span></div>
+        <pre>{
+  "error": "unauthorized",
+  "message": "JWT token is invalid or has expired."
+}</pre>
+      </div>
     </div>
 
     <div class="docs-section" id="doc-rate">
       <h2>Rate Limits</h2>
-      <div class="code-block"><pre><span class="k">X-RateLimit-Limit:</span>     <span class="s">120</span>
-<span class="k">X-RateLimit-Remaining:</span> <span class="s">118</span>
-<span class="k">X-RateLimit-Reset:</span>     <span class="s">1702393260</span></pre></div>
+      <p>Rate limit status is returned in response headers on every request.</p>
+      <div class="code-block"><pre><span class="k">X-RateLimit-Limit:     </span><span class="s">120</span>
+<span class="k">X-RateLimit-Remaining: </span><span class="s">118</span>
+<span class="k">X-RateLimit-Reset:     </span><span class="s">1702393260</span></pre></div>
       <table class="param-table">
         <tr><th>Plan</th><th>GET /images</th><th>POST /order</th><th>GET /download</th></tr>
-        <tr><td>Free</td><td>30/min</td><td>2/min</td><td>5/min</td></tr>
-        <tr><td>Professional</td><td>120/min</td><td>20/min</td><td>50/min</td></tr>
+        <tr><td>Free</td><td>30 / min</td><td>2 / min</td><td>5 / min</td></tr>
+        <tr><td>Professional</td><td>120 / min</td><td>20 / min</td><td>50 / min</td></tr>
         <tr><td>Enterprise</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
       </table>
+    </div>
+
+    <div class="docs-section" id="doc-webhooks">
+      <h2>Webhooks</h2>
+      <p>Subscribe to order and tasking events via HTTPS webhooks. Configure endpoints in your account dashboard at <strong>uzma.com.my</strong>.</p>
+      <h3>Available Events</h3>
+      <table class="param-table">
+        <tr><th>Event</th><th>Trigger</th></tr>
+        <tr><td>order.completed</td><td>Order processed, download ready</td></tr>
+        <tr><td>order.failed</td><td>Payment or processing failure</td></tr>
+        <tr><td>tasking.acquired</td><td>Tasked image captured successfully</td></tr>
+        <tr><td>tasking.failed</td><td>Cloud cover or satellite miss</td></tr>
+      </table>
+      <div class="code-block"><pre><span class="cm"># Webhook payload example</span>
+<span class="n">{</span>
+  <span class="k">"event"</span>:     <span class="s">"order.completed"</span>,
+  <span class="k">"timestamp"</span>: <span class="s">"2024-12-10T08:00:00Z"</span>,
+  <span class="k">"data"</span>: <span class="n">{</span>
+    <span class="k">"order_id"</span>:     <span class="s">"ord_20241210_abc123"</span>,
+    <span class="k">"download_url"</span>: <span class="s">"https://cdn.uzma.com.my/dl/..."</span>
+  <span class="n">}</span>
+<span class="n">}</span></pre></div>
     </div>
 
   </div>
@@ -433,15 +411,40 @@ const { token } = await r.json();</pre>
 <div class="cart" id="cart">
   <div class="cart-hdr"><span class="cart-ttl">Your Cart</span><button class="cart-x" onclick="toggleCart()">×</button></div>
   <div class="cart-body" id="cart-body"><div class="empty">No items yet.</div></div>
-  <div id="cart-foot" style="display:none;"><div class="cart-foot"><div class="total-row"><span class="total-label">Total</span><span class="total-val" id="total-val">RM 0</span></div><button class="checkout" onclick="openPW()">PROCEED TO CHECKOUT</button></div></div>
+  <div id="cart-foot" style="display:none;"><div class="cart-foot"><div class="total-row"><span class="total-label">Total</span><span class="total-val" id="total-val">RM 0</span></div><button class="checkout" onclick="openPW()">Proceed to Checkout</button></div></div>
 </div>
-<div class="pw-bg" id="pwm" onclick="bgClose(event,'pwm')"><div class="pw-box"><div class="pw-hdr"><h2>Access Verification</h2></div><div class="pw-body"><div class="field"><label>Email</label><input type="email" id="pw-email" placeholder="name@example.com"></div><div class="field"><label>API Key</label><input type="password" id="pw-pass" placeholder="••••••••••••"><div class="pw-err" id="pw-err"></div></div><div class="pw-actions"><button class="pw-cancel" onclick="closeModal('pwm')">Cancel</button><button class="pw-ok" id="pw-ok" onclick="submitPW()">CONFIRM</button></div></div></div></div>
+<div class="pw-bg" id="pwm" onclick="bgClose(event,'pwm')">
+  <div class="pw-box"><div class="pw-hdr"><h2>Access Verification</h2></div>
+  <div class="pw-body">
+    <div class="field"><label>Email</label><input type="email" id="pw-email" placeholder="name@example.com"></div>
+    <div class="field"><label>API Key</label><input type="password" id="pw-pass" placeholder="••••••••••••"><div class="pw-err" id="pw-err"></div></div>
+    <div class="pw-actions"><button class="pw-cancel" onclick="closeModal('pwm')">Cancel</button><button class="pw-ok" id="pw-ok" onclick="submitPW()">Confirm</button></div>
+  </div></div>
+</div>
 <div class="auth-bg" id="auth-modal" onclick="bgClose(event,'auth-modal')">
   <div class="auth-box">
     <div class="auth-tabs"><div class="auth-tab on" id="tab-login" onclick="switchTab('login')">Log In</div><div class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</div></div>
     <button class="auth-close" onclick="closeModal('auth-modal')">×</button>
-    <div class="auth-panel on" id="panel-login"><h3>Welcome back</h3><p>Sign in to your UZMA account.</p><div class="field"><label>Email</label><input type="email" id="login-email" placeholder="name@example.com"></div><div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="login-pass" placeholder="••••••••"><button class="pw-eye" onclick="toggleEye('login-pass',this)">👁</button></div></div><div class="auth-err" id="login-err"></div><button class="auth-submit" onclick="doLogin()">LOG IN</button><div class="auth-divider"><span>OR</span></div><button class="auth-or-btn" onclick="demoLogin()">Continue as Demo User</button><div class="auth-footer">No account? <a onclick="switchTab('signup')">Sign up free</a></div></div>
-    <div class="auth-panel" id="panel-signup"><h3>Create your account</h3><div class="field"><label>Full Name</label><input type="text" id="su-name" placeholder="Ahmad bin Ibrahim"></div><div class="field"><label>Email</label><input type="email" id="su-email" placeholder="name@example.com"></div><div class="field"><label>Organisation</label><input type="text" id="su-org" placeholder="Company / University"></div><div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="su-pass" placeholder="Min. 8 characters" oninput="checkStrength(this.value)"><button class="pw-eye" onclick="toggleEye('su-pass',this)">👁</button></div><div class="strength-bar"><div class="strength-fill" id="strength-fill" style="width:0%;background:#E24B4A;"></div></div></div><div class="auth-err" id="su-err"></div><button class="auth-submit" onclick="doSignup()">CREATE ACCOUNT</button><div class="auth-footer">Already have an account? <a onclick="switchTab('login')">Log in</a></div></div>
+    <div class="auth-panel on" id="panel-login">
+      <h3>Welcome Back</h3><p>Sign in to your UZMA account.</p>
+      <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="name@example.com"></div>
+      <div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="login-pass" placeholder="••••••••"><button class="pw-eye" onclick="toggleEye('login-pass',this)">👁</button></div></div>
+      <div class="auth-err" id="login-err"></div>
+      <button class="auth-submit" onclick="doLogin()">Log In</button>
+      <div class="auth-divider"><span>OR</span></div>
+      <button class="auth-or-btn" onclick="demoLogin()">Continue as Demo User</button>
+      <div class="auth-footer">No account? <a onclick="switchTab('signup')">Sign up free</a></div>
+    </div>
+    <div class="auth-panel" id="panel-signup">
+      <h3>Create Account</h3>
+      <div class="field"><label>Full Name</label><input type="text" id="su-name" placeholder="Ahmad bin Ibrahim"></div>
+      <div class="field"><label>Email</label><input type="email" id="su-email" placeholder="name@example.com"></div>
+      <div class="field"><label>Organisation</label><input type="text" id="su-org" placeholder="Company / University"></div>
+      <div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="su-pass" placeholder="Min. 8 characters" oninput="checkStrength(this.value)"><button class="pw-eye" onclick="toggleEye('su-pass',this)">👁</button></div><div class="strength-bar"><div class="strength-fill" id="strength-fill" style="width:0%;background:#E24B4A;"></div></div></div>
+      <div class="auth-err" id="su-err"></div>
+      <button class="auth-submit" onclick="doSignup()">Create Account</button>
+      <div class="auth-footer">Already have an account? <a onclick="switchTab('login')">Log in</a></div>
+    </div>
   </div>
 </div>
 
@@ -451,139 +454,38 @@ function toggleMobileNav(){
   document.getElementById('nav-mobile-drawer').classList.toggle('open');
   document.getElementById('nav-hamburger').classList.toggle('open');
 }
-
 function toggleSidebar(){
-  const sb=document.getElementById('docs-sidebar');
-  const btn=document.getElementById('sidebar-toggle');
+  const sb  = document.getElementById('docs-sidebar');
+  const btn = document.getElementById('sidebar-toggle');
   sb.classList.toggle('mobile-open');
   btn.classList.toggle('open');
 }
-
-function scrollDoc(id,el){
-  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
-  document.querySelectorAll('.docs-sidebar-link').forEach(l=>l.classList.remove('on'));
+function scrollDoc(id, el){
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth', block:'start'});
+  document.querySelectorAll('.docs-sidebar-link').forEach(l => l.classList.remove('on'));
   el.classList.add('on');
-  // Close sidebar on mobile after click
-  if(window.innerWidth<=768){
+  if(window.innerWidth <= 768){
     document.getElementById('docs-sidebar').classList.remove('mobile-open');
     document.getElementById('sidebar-toggle').classList.remove('open');
   }
 }
-
-function setSnippet(group,lang,btn){
-  const parent=btn.closest('.snippet-gen');
-  parent.querySelectorAll('.snippet-tab').forEach(t=>t.classList.remove('on'));
-  parent.querySelectorAll('.snippet-content').forEach(c=>c.classList.remove('on'));
+function setSnippet(group, lang, btn){
+  const parent = btn.closest('.snippet-gen');
+  parent.querySelectorAll('.snippet-tab').forEach(t => t.classList.remove('on'));
+  parent.querySelectorAll('.snippet-content').forEach(c => c.classList.remove('on'));
   btn.classList.add('on');
-  const target=parent.querySelector(`#snip-${group}-${lang}`);
-  if(target)target.classList.add('on');
+  const target = parent.querySelector(`#snip-${group}-${lang}`);
+  if(target) target.classList.add('on');
 }
-
 function copySnippet(id){
-  const el=document.getElementById(id);
-  const text=el.querySelector('pre').textContent;
-  navigator.clipboard.writeText(text).then(()=>{
-    const btn=el.querySelector('.snippet-copy');
-    btn.textContent='COPIED!';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='COPY';btn.classList.remove('copied');},2000);
+  const el   = document.getElementById(id);
+  const text = el.querySelector('pre').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = el.querySelector('.snippet-copy');
+    btn.textContent = 'Copied!'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
   });
 }
-
-const PG_PARAMS={
-  'GET /images':[{key:'search',placeholder:'e.g. Kuala Lumpur',val:''},{key:'type',placeholder:'optical / sar',val:''},{key:'res_max',placeholder:'e.g. 1.0',val:''},{key:'limit',placeholder:'20',val:''}],
-  'GET /images/:id/preview':[{key:'id',placeholder:'img_kl_20241115_opt',val:'img_kl_20241115_opt'}],
-  'POST /auth':[{key:'email',placeholder:'user@example.com',val:'demo@uzma.com.my'},{key:'password',placeholder:'your_api_key',val:'demo_key_1234'}],
-  'GET /download/:token':[{key:'token',placeholder:'signed_download_token',val:''}],
-};
-
-const MOCK_RESPONSES={
-  'GET /images':()=>JSON.stringify({total:12,limit:20,offset:0,data:[{id:"img_kl_20241115_opt",name:"Kuala Lumpur City Centre",type:"optical",resolution_m:0.5,price_myr:850},{id:"img_pg_20241022_ms",name:"Penang Island Overview",type:"multispectral",resolution_m:1.0,price_myr:1200}]},null,2),
-  'GET /images/:id/preview':()=>JSON.stringify({id:"img_kl_20241115_opt",preview_url:"https://cdn.uzma.com.my/previews/img_kl_opt_blurred.jpg",watermarked:true,resolution_cm:50},null,2),
-  'POST /auth':()=>JSON.stringify({token:"eyJhbGciOiJIUzI1NiJ9.SIMULATED_TOKEN",expires_in:86400,user:{email:"demo@uzma.com.my",plan:"professional",quota_remaining:42}},null,2),
-  'GET /download/:token':()=>JSON.stringify({error:"410 Gone",message:"Token expired or already used."},null,2),
-};
-
-function updatePGParams(){
-  const ep=document.getElementById('pg-endpoint').value;
-  const params=PG_PARAMS[ep]||[];
-  document.getElementById('pg-params').innerHTML=params.map(p=>`
-    <div class="pg-param-row">
-      <span class="pg-param-key">${p.key}</span>
-      <input class="pg-param-val" id="pgp-${p.key}" placeholder="${p.placeholder}" value="${p.val}">
-    </div>`).join('');
-}
-
-async function sendRequest(){
-  const ep=document.getElementById('pg-endpoint').value;
-  document.getElementById('pg-loading').classList.add('show');
-  document.getElementById('pg-send').disabled=true;
-  document.getElementById('pg-status-text').textContent='Sending…';
-  document.getElementById('pg-dot').className='pg-status-dot idle';
-  await new Promise(r=>setTimeout(r,900+Math.random()*600));
-  document.getElementById('pg-loading').classList.remove('show');
-  document.getElementById('pg-send').disabled=false;
-  const fn=MOCK_RESPONSES[ep];
-  const result=fn?fn():'{}';
-  const isError=result.includes('"error"');
-  document.getElementById('pg-dot').className='pg-status-dot '+(isError?'err':'ok');
-  document.getElementById('pg-status-text').textContent=isError?'200 OK (error body)':'200 OK — Simulated';
-  document.getElementById('pg-response-pre').textContent=result;
-}
-
-const RB_FIELDS={
-  images:[{id:'rb-search',label:'Search',placeholder:'Kuala Lumpur'},{id:'rb-type',label:'Type',placeholder:'optical'},{id:'rb-res',label:'res_max',placeholder:'1.0'},{id:'rb-limit',label:'Limit',placeholder:'20'}],
-  preview:[{id:'rb-id',label:'Scene ID',placeholder:'img_kl_20241115_opt'}],
-  auth:[{id:'rb-email',label:'Email',placeholder:'user@example.com'},{id:'rb-pass',label:'API Key',placeholder:'your_api_key'}],
-  order:[{id:'rb-scene-id',label:'Scene ID',placeholder:'img_kl_20241115_opt'},{id:'rb-payment',label:'Payment',placeholder:'quota'}],
-};
-
-function renderRBFields(){
-  const ep=document.getElementById('rb-endpoint').value;
-  const fields=RB_FIELDS[ep]||[];
-  document.getElementById('rb-dynamic-fields').innerHTML=fields.map(f=>`
-    <div class="rb-field"><label>${f.label}</label><input id="${f.id}" placeholder="${f.placeholder}" oninput="buildRequest()"></div>`).join('');
-}
-
-function buildRequest(){
-  renderRBFields();
-  const ep=document.getElementById('rb-endpoint').value;
-  const lang=document.getElementById('rb-lang').value;
-  const fields=RB_FIELDS[ep]||[];
-  const vals={};
-  fields.forEach(f=>{const el=document.getElementById(f.id);vals[f.label.toLowerCase().replace(/\s/,'_')]=el?el.value||el.placeholder:'';});
-  const base='https://api.uzma.com.my/v1';
-  let code='';
-  if(ep==='images'){
-    const qs=Object.entries({search:vals['search']||'',type:vals['type']||'',res_max:vals['res_max']||''}).filter(([,v])=>v).map(([k,v])=>`${k}=${encodeURIComponent(v)}`).join('&');
-    const url=`${base}/images${qs?'?'+qs:''}`;
-    if(lang==='curl')code=`curl -X GET "${url}" \\\n  -H "Content-Type: application/json"`;
-    else if(lang==='python')code=`import requests\nresponse = requests.get("${base}/images", params={"type":"${vals['type']}","res_max":"${vals['res_max']}"})\ndata = response.json()`;
-    else if(lang==='js')code=`const res = await fetch("${url}");\nconst data = await res.json();`;
-    else if(lang==='php')code=`$data = json_decode(file_get_contents("${url}"), true);`;
-  }else if(ep==='auth'){
-    const email=vals['email']||'user@example.com',key=vals['api_key']||'your_api_key';
-    if(lang==='curl')code=`curl -X POST "${base}/auth" \\\n  -H "Content-Type: application/json" \\\n  -d '{"email":"${email}","password":"${key}"}'`;
-    else if(lang==='python')code=`r = requests.post("${base}/auth", json={"email":"${email}","password":"${key}"})\ntoken = r.json()["token"]`;
-    else if(lang==='js')code=`const r = await fetch("${base}/auth",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:"${email}",password:"${key}"})});\nconst {token} = await r.json();`;
-    else if(lang==='php')code=`// POST to ${base}/auth with email and password, get token`;
-  }else if(ep==='preview'){
-    const id=vals['scene_id']||'img_kl_20241115_opt';
-    if(lang==='curl')code=`curl -X GET "${base}/images/${id}/preview"`;
-    else if(lang==='python')code=`preview = requests.get("${base}/images/${id}/preview").json()`;
-    else if(lang==='js')code=`const preview = await (await fetch("${base}/images/${id}/preview")).json();`;
-    else if(lang==='php')code=`$preview = json_decode(file_get_contents("${base}/images/${id}/preview"), true);`;
-  }else if(ep==='order'){
-    const sid=vals['scene_id']||'img_kl_20241115_opt',pay=vals['payment']||'quota';
-    if(lang==='curl')code=`curl -X POST "${base}/order" \\\n  -H "Authorization: Bearer YOUR_TOKEN" \\\n  -H "Content-Type: application/json" \\\n  -d '{"items":[{"id":"${sid}"}],"payment_method":"${pay}"}'`;
-    else if(lang==='python')code=`r = requests.post("${base}/order",headers={"Authorization":"Bearer YOUR_TOKEN"},json={"items":[{"id":"${sid}"}],"payment_method":"${pay}"})\norder = r.json()`;
-    else if(lang==='js')code=`const r = await fetch("${base}/order",{method:"POST",headers:{"Authorization":"Bearer YOUR_TOKEN","Content-Type":"application/json"},body:JSON.stringify({items:[{id:"${sid}"}],payment_method:"${pay}"})});`;
-    else if(lang==='php')code=`// POST to ${base}/order with bearer token`;
-  }
-  document.getElementById('rb-output').textContent=code||'// Configure above to generate code';
-}
-
-updatePGParams();
-buildRequest();
 </script>
 </body>
 </html>
