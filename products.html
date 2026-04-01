@@ -3,114 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products — UZMA Satellite Portal</title>
+<title>Products — UZMA Geospatial AI Platform</title>
 <link rel="stylesheet" href="shared.css">
 <style>
 /* ===== RESOLUTION GUIDE ===== */
-.res-guide{background:#fff;border-radius:10px;border:1px solid var(--gray-line);margin:1.5rem 1.2rem 0;overflow:hidden;}
-.res-guide-hdr{background:var(--gray-dark);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+.res-guide{
+  background:#fff;border-radius:10px;border:1px solid var(--gray-line);
+  margin:1.5rem 1.2rem 0;overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.res-guide-hdr{
+  background:var(--gray-dark);padding:12px 18px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;
+}
 .res-guide-hdr span:first-child{font-size:11px;font-weight:800;color:#fff;letter-spacing:1.5px;text-transform:uppercase;}
-.res-guide-hdr span:last-child{font-size:10px;color:#888;}
+.res-guide-hdr span:last-child{font-size:10px;color:#666;}
 .res-guide-grid{display:grid;grid-template-columns:repeat(5,1fr);}
-.res-guide-cell{padding:12px 8px;border-right:1px solid var(--gray-card);text-align:center;}
+.res-guide-cell{
+  padding:14px 8px;border-right:1px solid var(--gray-card);
+  text-align:center;transition:background .15s;cursor:default;
+}
 .res-guide-cell:last-child{border-right:none;}
-.res-gsd{font-size:16px;font-weight:800;}
-.res-tier{font-size:9px;font-weight:700;letter-spacing:1px;margin:2px 0;}
-.res-desc{font-size:10px;color:var(--gray-muted);}
+.res-guide-cell:hover{background:#FFF8F5;}
+.res-gsd{font-size:18px;font-weight:800;font-family:'Rajdhani',sans-serif;}
+.res-tier{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:3px 0;}
+.res-desc{font-size:10px;color:var(--gray-muted);line-height:1.4;}
 
 /* ===== AI RECOMMENDER ===== */
-.ai-rec-section{margin:1.5rem 1.2rem 0;background:var(--gray-dark);border-radius:10px;border:1px solid #3A3A3A;overflow:hidden;}
-.ai-rec-hdr{padding:14px 16px;border-bottom:1px solid #333;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.ai-rec-hdr-icon{background:var(--orange);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:3px;letter-spacing:1.5px;flex-shrink:0;}
-.ai-rec-hdr h3{font-size:13px;font-weight:800;color:#fff;margin:0;}
+.ai-rec-section{
+  margin:1.5rem 1.2rem 0;
+  background:var(--gray-dark);border-radius:10px;
+  border:1px solid #333;overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+}
+.ai-rec-hdr{
+  padding:16px 18px;border-bottom:1px solid #2A2A2A;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.ai-rec-hdr-icon{
+  background:var(--orange);color:#fff;font-size:9px;font-weight:800;
+  padding:4px 10px;border-radius:3px;letter-spacing:2px;flex-shrink:0;
+  font-family:'Inter',sans-serif;
+}
+.ai-rec-hdr h3{font-size:14px;font-weight:800;color:#fff;margin:0;font-family:'Rajdhani',sans-serif;letter-spacing:1px;}
 .ai-rec-hdr p{font-size:11px;color:#888;margin:0;}
-.ai-rec-body{padding:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.ai-q{background:#1A1A1A;border-radius:8px;padding:12px;}
-.ai-q label{font-size:10px;font-weight:700;color:#888;letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:7px;}
-.ai-q select,.ai-q input{width:100%;background:#111;border:1px solid #333;color:#fff;padding:9px 10px;border-radius:4px;font-size:12px;outline:none;cursor:pointer;}
-.ai-q select option{background:#111;}
-.ai-rec-footer{padding:0 16px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
-.ai-rec-btn{background:var(--orange);color:#fff;border:none;padding:11px 24px;border-radius:5px;font-size:11px;font-weight:800;letter-spacing:1.5px;cursor:pointer;transition:background .2s;flex-shrink:0;}
+.ai-rec-body{
+  padding:18px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+}
+.ai-q{background:#1A1A1A;border-radius:8px;padding:14px;border:1px solid #2A2A2A;}
+.ai-q label{
+  font-size:9px;font-weight:700;color:#666;letter-spacing:2px;
+  text-transform:uppercase;display:block;margin-bottom:8px;
+  font-family:'Inter',sans-serif;
+}
+.ai-q select{
+  width:100%;background:#111;border:1px solid #333;color:#ddd;
+  padding:10px 11px;border-radius:4px;font-size:12px;outline:none;
+  cursor:pointer;font-family:'Inter',sans-serif;
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath stroke='%23666' stroke-width='1.5' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  padding-right:28px;
+  transition:border-color .18s;
+}
+.ai-q select:focus{border-color:var(--orange);}
+.ai-q select option{background:#111;color:#ddd;}
+.ai-rec-footer{
+  padding:0 18px 18px;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;flex-wrap:wrap;
+}
+.ai-rec-btn{
+  background:var(--orange);color:#fff;border:none;
+  padding:12px 26px;border-radius:5px;font-size:11px;font-weight:800;
+  letter-spacing:2px;cursor:pointer;transition:background .2s;flex-shrink:0;
+  font-family:'Inter',sans-serif;text-transform:uppercase;
+}
 .ai-rec-btn:hover{background:var(--orange-light);}
-.ai-rec-result{background:#1A1A1A;border:1px solid #333;border-radius:8px;padding:12px 16px;font-size:12px;color:#ccc;line-height:1.6;flex:1;display:none;min-height:44px;}
+.ai-rec-btn:disabled{background:#2A2A2A;color:#555;cursor:not-allowed;}
+.ai-rec-result{
+  background:#1A1A1A;border:1px solid #2A2A2A;border-radius:8px;
+  padding:14px 16px;font-size:12px;color:#ccc;line-height:1.65;
+  flex:1;display:none;min-height:50px;
+}
 .ai-rec-result.show{display:block;}
 .ai-rec-loading{display:none;align-items:center;gap:8px;font-size:12px;color:#888;}
 .ai-rec-loading.show{display:flex;}
 .ai-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:bounce .8s infinite;}
 .ai-dot:nth-child(2){animation-delay:.15s;}
 .ai-dot:nth-child(3){animation-delay:.3s;}
-@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
 
 /* ===== PRODUCTS GRID ===== */
-.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;padding:1.5rem 1.2rem;}
-.prod-card{background:#fff;border-radius:10px;border:1px solid var(--gray-line);overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;}
-.prod-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1);}
-.prod-card.highlighted{border:2px solid var(--orange);box-shadow:0 0 0 4px rgba(212,84,10,.1);}
-.prod-card-top{padding:18px;border-bottom:1px solid var(--gray-line);flex:1;position:relative;}
-.prod-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-size:20px;}
-.prod-card-top h3{font-size:14px;font-weight:800;color:var(--gray-dark);margin-bottom:4px;}
-.prod-card-top p{font-size:12px;color:var(--gray-muted);line-height:1.6;}
-.prod-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:1px;display:inline-block;margin-top:8px;}
+.products-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.2rem;padding:1.5rem 1.2rem;
+}
+.prod-card{
+  background:#fff;border-radius:10px;border:1px solid var(--gray-line);
+  overflow:hidden;
+  transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease;
+  display:flex;flex-direction:column;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.prod-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.1);}
+.prod-card.highlighted{
+  border:2px solid var(--orange);
+  box-shadow:0 0 0 4px rgba(212,84,10,.12),0 12px 36px rgba(0,0,0,.1);
+}
+.prod-card-top{padding:20px;border-bottom:1px solid var(--gray-line);flex:1;position:relative;}
+.prod-icon{
+  width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;font-size:22px;
+}
+.prod-card-top h3{font-size:14px;font-weight:800;color:var(--gray-dark);margin-bottom:5px;}
+.prod-card-top p{font-size:12px;color:var(--gray-muted);line-height:1.65;}
+.prod-badge{
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px;
+  letter-spacing:.5px;display:inline-block;margin-top:10px;
+}
 .prod-badge.hr{background:#FFF0E8;color:#C04008;}
 .prod-badge.lr{background:#E6F1FB;color:#185FA5;}
 .prod-badge.ms{background:#E1F5EE;color:#0F6E56;}
 .prod-badge.sar{background:#ECEAE7;color:#555;}
-.prod-features{padding:8px 18px 12px;display:flex;flex-direction:column;gap:5px;}
-.prod-feat{font-size:11px;color:var(--gray-mid);display:flex;align-items:center;gap:6px;}
-.prod-feat::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0;}
-.prod-card-bot{padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--gray-line);}
-.prod-price{font-size:17px;font-weight:800;color:var(--orange);}
+.prod-features{padding:10px 20px 14px;display:flex;flex-direction:column;gap:6px;}
+.prod-feat{font-size:11px;color:var(--gray-mid);display:flex;align-items:center;gap:7px;}
+.prod-feat::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--orange);flex-shrink:0;
+}
+.prod-card-bot{
+  padding:14px 20px;display:flex;justify-content:space-between;
+  align-items:center;border-top:1px solid var(--gray-line);
+  background:var(--gray-bg);
+}
+.prod-price{font-size:18px;font-weight:800;color:var(--orange);font-family:'Rajdhani',sans-serif;}
 .prod-price-note{font-size:10px;color:var(--gray-muted);}
-.ai-rec-badge{position:absolute;top:12px;right:12px;background:var(--orange);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:3px;letter-spacing:1px;}
+.ai-rec-badge{
+  position:absolute;top:14px;right:14px;
+  background:var(--orange);color:#fff;font-size:9px;font-weight:800;
+  padding:3px 9px;border-radius:3px;letter-spacing:1.5px;
+  font-family:'Inter',sans-serif;
+  animation:badgePop .3s cubic-bezier(.22,1,.36,1);
+}
+@keyframes badgePop{from{transform:scale(0)}to{transform:scale(1)}}
 
 /* ===== SPEC TABLE ===== */
 .spec-section{margin:0 1.2rem 1.5rem;}
-.spec-section-hdr{background:var(--gray-dark);border-radius:10px 10px 0 0;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.spec-section-hdr{
+  background:var(--gray-dark);border-radius:10px 10px 0 0;
+  padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
 .spec-section-hdr span:first-child{font-size:11px;font-weight:800;color:#fff;letter-spacing:1.5px;text-transform:uppercase;}
 .spec-toggle-btns{display:flex;gap:5px;}
-.spec-tog{background:#1A1A1A;border:1px solid #444;color:#888;padding:5px 10px;border-radius:4px;font-size:10px;font-weight:700;cursor:pointer;transition:all .18s;}
+.spec-tog{
+  background:#1A1A1A;border:1px solid #444;color:#888;
+  padding:5px 12px;border-radius:4px;font-size:10px;font-weight:700;
+  cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif;
+}
+.spec-tog:hover{border-color:#888;color:#ccc;}
 .spec-tog.on{background:var(--orange);border-color:var(--orange);color:#fff;}
-.spec-table-wrap{background:#fff;border-radius:0 0 10px 10px;border:1px solid var(--gray-line);border-top:none;overflow-x:auto;-webkit-overflow-scrolling:touch;}
-.spec-table{width:100%;border-collapse:collapse;font-size:12px;min-width:540px;}
-.spec-table th{background:var(--gray-bg);padding:9px 14px;text-align:center;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray-muted);border-bottom:1px solid var(--gray-line);}
+.spec-table-wrap{
+  background:#fff;border-radius:0 0 10px 10px;
+  border:1px solid var(--gray-line);border-top:none;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.spec-table{width:100%;border-collapse:collapse;font-size:12px;min-width:560px;}
+.spec-table th{
+  background:var(--gray-bg);padding:10px 14px;text-align:center;
+  font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gray-muted);border-bottom:1px solid var(--gray-line);
+}
 .spec-table th:first-child{text-align:left;color:var(--gray-dark);}
-.spec-table td{padding:9px 14px;text-align:center;border-bottom:1px solid var(--gray-card);color:var(--gray-mid);}
+.spec-table td{padding:10px 14px;text-align:center;border-bottom:1px solid var(--gray-card);color:var(--gray-mid);}
 .spec-table td:first-child{text-align:left;font-weight:700;color:var(--gray-dark);}
 .spec-table tr:last-child td{border-bottom:none;}
-.spec-table tr:hover td{background:#F9F9F9;}
+.spec-table tr:hover td{background:#FFF8F5;}
 .spec-yes{color:#0F6E56;font-weight:700;}
-.spec-no{color:#bbb;}
-.spec-best{background:#FFF0E8 !important;font-weight:800;color:var(--orange)!important;}
+.spec-no{color:#ccc;}
+.spec-best{background:#FFF0E8!important;font-weight:800;color:var(--orange)!important;}
 
-/* ===== ROI CALCULATOR ===== */
-.roi-section{margin:0 1.2rem 1.5rem;background:#fff;border-radius:10px;border:1px solid var(--gray-line);overflow:hidden;}
-.roi-hdr{background:var(--gray-dark);padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+/* ===== COST ESTIMATOR ===== */
+.roi-section{
+  margin:0 1.2rem 1.5rem;background:#fff;border-radius:10px;
+  border:1px solid var(--gray-line);overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.roi-hdr{background:var(--gray-dark);padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .roi-hdr-title{font-size:11px;font-weight:800;color:#fff;letter-spacing:1.5px;text-transform:uppercase;}
 .roi-hdr-sub{font-size:10px;color:#888;}
-.roi-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.roi-inputs{display:flex;flex-direction:column;gap:10px;}
+.roi-body{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.roi-inputs{display:flex;flex-direction:column;gap:11px;}
 .roi-input-row{display:flex;flex-direction:column;gap:4px;}
-.roi-input-row label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-muted);}
-.roi-input-row input,.roi-input-row select{border:1px solid var(--gray-line);padding:8px 10px;border-radius:4px;font-size:12px;color:var(--gray-dark);outline:none;}
+.roi-input-row label{
+  font-size:9px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--gray-muted);
+  font-family:'Inter',sans-serif;
+}
+.roi-input-row input,.roi-input-row select{
+  border:1px solid var(--gray-line);padding:9px 11px;
+  border-radius:4px;font-size:12px;color:var(--gray-dark);
+  outline:none;font-family:'Inter',sans-serif;transition:border .2s;
+}
 .roi-input-row input:focus,.roi-input-row select:focus{border-color:var(--orange);}
-.roi-calc-btn{background:var(--orange);color:#fff;border:none;padding:10px;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:1.5px;cursor:pointer;margin-top:4px;}
+.roi-calc-btn{
+  background:var(--orange);color:#fff;border:none;padding:11px;
+  border-radius:5px;font-size:11px;font-weight:700;letter-spacing:2px;
+  cursor:pointer;margin-top:4px;font-family:'Inter',sans-serif;
+  text-transform:uppercase;transition:background .2s;
+}
 .roi-calc-btn:hover{background:var(--orange-light);}
-.roi-results{background:var(--gray-bg);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:8px;}
-.roi-result-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--gray-line);}
+.roi-results{
+  background:var(--gray-bg);border-radius:8px;padding:16px;
+  display:flex;flex-direction:column;gap:0;
+  border:1px solid var(--gray-card);
+}
+.roi-result-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:9px 0;border-bottom:1px solid var(--gray-line);
+}
 .roi-result-row:last-child{border-bottom:none;}
 .roi-result-label{font-size:11px;color:var(--gray-muted);font-weight:600;}
-.roi-result-val{font-size:14px;font-weight:800;color:var(--gray-dark);}
+.roi-result-val{font-size:14px;font-weight:800;color:var(--gray-dark);font-family:'Rajdhani',sans-serif;}
 .roi-result-val.highlight{color:var(--orange);}
 .roi-result-val.green{color:#0F6E56;}
+
+/* ===== SECTION HEADER ===== */
+.products-section-hdr{
+  padding:1.5rem 1.2rem .2rem;
+  display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.products-section-hdr-left {}
+.products-section-eyebrow{
+  font-size:9px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--orange);margin-bottom:4px;
+}
+.products-section-title{
+  font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;
+  color:var(--gray-dark);letter-spacing:2px;text-transform:uppercase;
+}
 
 /* ===== MOBILE ===== */
 @media(max-width:768px){
   .res-guide{margin:1rem .9rem 0;}
-  .res-guide-grid{grid-template-columns:repeat(5,1fr);}
-  .res-gsd{font-size:13px;}
-  .res-desc{font-size:9px;}
+  .res-gsd{font-size:15px;}
   .ai-rec-section{margin:1rem .9rem 0;}
-  .ai-rec-body{grid-template-columns:1fr;gap:8px;padding:12px;}
+  .ai-rec-body{grid-template-columns:1fr;gap:10px;padding:14px;}
   .ai-rec-footer{flex-direction:column;align-items:stretch;}
   .ai-rec-btn{text-align:center;}
   .products-grid{grid-template-columns:1fr 1fr;padding:1rem .9rem;gap:.9rem;}
@@ -120,10 +260,11 @@
   .spec-section{margin:0 .9rem 1rem;}
   .roi-section{margin:0 .9rem 1rem;}
   .roi-body{grid-template-columns:1fr;}
+  .products-section-hdr{padding:1rem .9rem .2rem;}
 }
 @media(max-width:480px){
   .res-guide-grid{grid-template-columns:repeat(3,1fr);}
-  .res-guide-cell:nth-child(4),.res-guide-cell:nth-child(5){display:none;}
+  .res-guide-cell:nth-child(n+4){display:none;}
   .res-guide-hdr span:last-child{display:none;}
   .products-grid{grid-template-columns:1fr;}
 }
@@ -132,7 +273,14 @@
 <body>
 
 <nav>
-  <a href="marketplace.html"><img class="logo-img" src="LogoUzma.png" alt="UZMA"></a>
+  <a class="nav-brand" href="marketplace.html">
+    <img class="logo-img" src="LogoUzma.png" alt="UZMA">
+    <div class="nav-brand-divider"></div>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name">UZMA</span>
+      <span class="nav-brand-sub">Geospatial AI Platform</span>
+    </div>
+  </a>
   <div class="nav-links">
     <a class="nav-link" href="marketplace.html">Marketplace</a>
     <a class="nav-link active" href="products.html">Products</a>
@@ -155,6 +303,7 @@
 <div class="toast" id="toast"></div>
 
 <div class="page-hero">
+  <div class="page-hero-eyebrow">UZMA · Geospatial AI Platform</div>
   <h1>Our Products</h1>
   <p>From ultra-high resolution optical to SAR and multispectral datasets — choose the right data for your project.</p>
 </div>
@@ -162,15 +311,35 @@
 <!-- RESOLUTION GUIDE -->
 <div class="res-guide">
   <div class="res-guide-hdr">
-    <span>Resolution Guide — GSD</span>
-    <span>What can you see at each resolution?</span>
+    <span>Resolution Guide — Ground Sample Distance</span>
+    <span>What can you identify at each resolution?</span>
   </div>
   <div class="res-guide-grid">
-    <div class="res-guide-cell"><div class="res-gsd" style="color:var(--orange);">25 cm</div><div class="res-tier" style="color:var(--orange);">ULTRA-HD</div><div class="res-desc">Individual vehicles, manholes</div></div>
-    <div class="res-guide-cell"><div class="res-gsd" style="color:#E86A1A;">50 cm</div><div class="res-tier" style="color:#E86A1A;">HIGH-RES</div><div class="res-desc">Buildings, roads, large vehicles</div></div>
-    <div class="res-guide-cell"><div class="res-gsd" style="color:#BA7517;">1–2 m</div><div class="res-tier" style="color:#BA7517;">MEDIUM</div><div class="res-desc">Urban mapping, crop rows</div></div>
-    <div class="res-guide-cell"><div class="res-gsd" style="color:#3B8BD4;">3 m</div><div class="res-tier" style="color:#3B8BD4;">LOW-RES</div><div class="res-desc">Regional land use, hydrology</div></div>
-    <div class="res-guide-cell"><div class="res-gsd" style="color:#185FA5;">5+ m</div><div class="res-tier" style="color:#185FA5;">WIDE</div><div class="res-desc">Country-scale monitoring</div></div>
+    <div class="res-guide-cell">
+      <div class="res-gsd" style="color:var(--orange);">25 cm</div>
+      <div class="res-tier" style="color:var(--orange);">ULTRA-HD</div>
+      <div class="res-desc">Individual vehicles, manholes, tree crowns</div>
+    </div>
+    <div class="res-guide-cell">
+      <div class="res-gsd" style="color:#E86A1A;">50 cm</div>
+      <div class="res-tier" style="color:#E86A1A;">HIGH-RES</div>
+      <div class="res-desc">Buildings, roads, large vehicles</div>
+    </div>
+    <div class="res-guide-cell">
+      <div class="res-gsd" style="color:#BA7517;">1–2 m</div>
+      <div class="res-tier" style="color:#BA7517;">MEDIUM</div>
+      <div class="res-desc">Urban mapping, plantation rows</div>
+    </div>
+    <div class="res-guide-cell">
+      <div class="res-gsd" style="color:#3B8BD4;">3 m</div>
+      <div class="res-tier" style="color:#3B8BD4;">LOW-RES</div>
+      <div class="res-desc">Regional land use, hydrology</div>
+    </div>
+    <div class="res-guide-cell">
+      <div class="res-gsd" style="color:#185FA5;">5+ m</div>
+      <div class="res-tier" style="color:#185FA5;">WIDE</div>
+      <div class="res-desc">Country-scale monitoring, climate</div>
+    </div>
   </div>
 </div>
 
@@ -178,12 +347,14 @@
 <div class="ai-rec-section">
   <div class="ai-rec-hdr">
     <span class="ai-rec-hdr-icon">AI</span>
-    <h3>Product Recommender</h3>
-    <p>Answer 3 questions — AI will suggest the best product</p>
+    <div>
+      <h3>Product Recommender</h3>
+      <p>Answer 3 quick questions — our AI will suggest the best imagery product for your project</p>
+    </div>
   </div>
   <div class="ai-rec-body">
     <div class="ai-q">
-      <label>1. Your Use Case</label>
+      <label>1 · Your Use Case</label>
       <select id="ai-usecase">
         <option value="">Select use case…</option>
         <option value="flood monitoring and disaster response">Flood Monitoring / Disaster</option>
@@ -196,18 +367,18 @@
       </select>
     </div>
     <div class="ai-q">
-      <label>2. Budget (per acquisition)</label>
+      <label>2 · Budget per Acquisition</label>
       <select id="ai-budget">
         <option value="">Select budget…</option>
         <option value="under RM500">Under RM 500</option>
         <option value="RM500 to RM800">RM 500 – RM 800</option>
         <option value="RM800 to RM1200">RM 800 – RM 1,200</option>
         <option value="RM1200 to RM2000">RM 1,200 – RM 2,000</option>
-        <option value="above RM2000 budget is not a constraint">Above RM 2,000</option>
+        <option value="above RM2000, budget is not a constraint">Above RM 2,000</option>
       </select>
     </div>
     <div class="ai-q">
-      <label>3. Study Area Size</label>
+      <label>3 · Study Area Size</label>
       <select id="ai-area">
         <option value="">Select area…</option>
         <option value="small area under 5 km²">Small (&lt; 5 km²)</option>
@@ -220,21 +391,27 @@
   <div class="ai-rec-footer">
     <div class="ai-rec-loading" id="ai-rec-loading">
       <div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div>
-      <span>AI analysing…</span>
+      <span>AI analysing your requirements…</span>
     </div>
     <div class="ai-rec-result" id="ai-rec-result"></div>
-    <button class="ai-rec-btn" onclick="getAIRecommendation()">GET RECOMMENDATION →</button>
+    <button class="ai-rec-btn" id="ai-rec-btn-main" onclick="getAIRecommendation()">Get Recommendation →</button>
   </div>
 </div>
 
 <!-- PRODUCTS GRID -->
+<div class="products-section-hdr">
+  <div class="products-section-left">
+    <div class="products-section-eyebrow">Our Catalogue</div>
+    <div class="products-section-title">Imagery Products</div>
+  </div>
+</div>
 <div class="products-grid" id="products-grid">
   <div class="prod-card" data-product="vhr">
     <div class="prod-card-top">
       <div class="prod-icon" style="background:#FFF0E8;">🛰️</div>
       <h3>VHR Optical — 25 cm</h3>
-      <p>Ultra-high resolution RGB imagery for infrastructure inspection, urban planning, and defence.</p>
-      <span class="prod-badge hr">HIGH-RES · 25cm</span>
+      <p>Ultra-high resolution RGB imagery for infrastructure inspection, urban planning, and defence applications.</p>
+      <span class="prod-badge hr">ULTRA-HD · 25 cm</span>
     </div>
     <div class="prod-features">
       <div class="prod-feat">4-band (R, G, B, NIR)</div>
@@ -247,17 +424,18 @@
       <a class="btn-signup" href="marketplace.html">Browse →</a>
     </div>
   </div>
+
   <div class="prod-card" data-product="hr">
     <div class="prod-card-top">
       <div class="prod-icon" style="background:#FFF4EC;">🛰️</div>
       <h3>HR Optical — 50 cm</h3>
-      <p>High-resolution optical scenes for mapping, land use analysis, and disaster response.</p>
-      <span class="prod-badge hr">HIGH-RES · 50cm</span>
+      <p>High-resolution optical scenes for mapping, land use analysis, and rapid disaster response workflows.</p>
+      <span class="prod-badge hr">HIGH-RES · 50 cm</span>
     </div>
     <div class="prod-features">
       <div class="prod-feat">RGB + Panchromatic</div>
       <div class="prod-feat">Pan-sharpened option</div>
-      <div class="prod-feat">Georeferenced (±3m CE90)</div>
+      <div class="prod-feat">Georeferenced (±3 m CE90)</div>
       <div class="prod-feat">Malaysia archive from 2020</div>
     </div>
     <div class="prod-card-bot">
@@ -265,12 +443,13 @@
       <a class="btn-signup" href="marketplace.html">Browse →</a>
     </div>
   </div>
+
   <div class="prod-card" data-product="ms">
     <div class="prod-card-top">
       <div class="prod-icon" style="background:#E1F5EE;">🌿</div>
       <h3>Multispectral — 1–2 m</h3>
-      <p>8-band multispectral imagery for vegetation health, precision agriculture, and NDVI analysis.</p>
-      <span class="prod-badge ms">MULTISPECTRAL</span>
+      <p>8-band multispectral imagery for vegetation health monitoring, precision agriculture, and NDVI/EVI analysis.</p>
+      <span class="prod-badge ms">MULTISPECTRAL · 8-BAND</span>
     </div>
     <div class="prod-features">
       <div class="prod-feat">8 spectral bands</div>
@@ -283,16 +462,17 @@
       <a class="btn-signup" href="marketplace.html">Browse →</a>
     </div>
   </div>
+
   <div class="prod-card" data-product="sar">
     <div class="prod-card-top">
       <div class="prod-icon" style="background:#ECEAE7;">📡</div>
       <h3>SAR — C/L Band</h3>
-      <p>Cloud-penetrating SAR imagery for flood mapping, subsidence monitoring, and maritime surveillance.</p>
+      <p>Cloud-penetrating SAR imagery for flood mapping, subsidence monitoring, and all-weather maritime surveillance.</p>
       <span class="prod-badge sar">SAR · ALL WEATHER</span>
     </div>
     <div class="prod-features">
-      <div class="prod-feat">Works through cloud cover</div>
-      <div class="prod-feat">C-Band (3m) &amp; L-Band (1m)</div>
+      <div class="prod-feat">Works through cloud &amp; rain</div>
+      <div class="prod-feat">C-Band (3 m) &amp; L-Band (1 m)</div>
       <div class="prod-feat">Interferometric pairs available</div>
       <div class="prod-feat">Day &amp; night acquisition</div>
     </div>
@@ -301,12 +481,13 @@
       <a class="btn-signup" href="marketplace.html">Browse →</a>
     </div>
   </div>
+
   <div class="prod-card" data-product="tir">
     <div class="prod-card-top">
       <div class="prod-icon" style="background:#E6F1FB;">🌡️</div>
       <h3>Thermal Infrared — 5 m</h3>
-      <p>Thermal band imagery for heat island mapping, industrial monitoring, and environmental assessment.</p>
-      <span class="prod-badge lr">LOW-RES · 5m</span>
+      <p>Thermal band imagery for heat island mapping, industrial monitoring, and environmental assessments.</p>
+      <span class="prod-badge lr">LOW-RES · 5 m TIR</span>
     </div>
     <div class="prod-features">
       <div class="prod-feat">TIR band (10–12 µm)</div>
@@ -319,12 +500,13 @@
       <a class="btn-signup" href="marketplace.html">Browse →</a>
     </div>
   </div>
+
   <div class="prod-card" data-product="bundle">
     <div class="prod-card-top">
       <div class="prod-icon" style="background:#FBEAF0;">📦</div>
       <h3>Bundle Package</h3>
-      <p>Combine Optical + Multispectral + SAR for comprehensive analysis. Best value for research and government.</p>
-      <span style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;background:#FBEAF0;color:#993556;display:inline-block;margin-top:8px;">BUNDLE · SAVE 20%</span>
+      <p>Combine Optical + Multispectral + SAR for comprehensive multi-sensor analysis. Best value for research and government.</p>
+      <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px;background:#FBEAF0;color:#993556;display:inline-block;margin-top:10px;letter-spacing:.5px;">BUNDLE · SAVE 20%</span>
     </div>
     <div class="prod-features">
       <div class="prod-feat">All sensor types included</div>
@@ -339,14 +521,14 @@
   </div>
 </div>
 
-<!-- SPEC COMPARISON TABLE -->
+<!-- SPEC TABLE -->
 <div class="spec-section">
   <div class="spec-section-hdr">
-    <span>Product Spec Comparison</span>
+    <span>Product Specification Comparison</span>
     <div class="spec-toggle-btns">
       <button class="spec-tog on" onclick="setSpecView('all',this)">All</button>
       <button class="spec-tog" onclick="setSpecView('optical',this)">Optical</button>
-      <button class="spec-tog" onclick="setSpecView('best',this)">Best</button>
+      <button class="spec-tog" onclick="setSpecView('best',this)">Highlight Best</button>
     </div>
   </div>
   <div class="spec-table-wrap">
@@ -354,8 +536,8 @@
       <thead>
         <tr>
           <th>Attribute</th>
-          <th>VHR 25cm</th>
-          <th>HR 50cm</th>
+          <th>VHR 25 cm</th>
+          <th>HR 50 cm</th>
           <th>Multispectral</th>
           <th>SAR C/L</th>
           <th>Thermal IR</th>
@@ -377,22 +559,22 @@
   </div>
 </div>
 
-<!-- ROI CALCULATOR -->
+<!-- COST ESTIMATOR -->
 <div class="roi-section">
   <div class="roi-hdr">
     <span class="roi-hdr-title">💰 Coverage Cost Estimator</span>
-    <span class="roi-hdr-sub">Estimate total acquisition cost for your area</span>
+    <span class="roi-hdr-sub">Estimate total acquisition cost for your area of interest</span>
   </div>
   <div class="roi-body">
     <div class="roi-inputs">
       <div class="roi-input-row">
         <label>Product Type</label>
         <select id="roi-product" onchange="calcROI()">
-          <option value="1800">VHR Optical 25cm — RM1,800/km²</option>
-          <option value="850" selected>HR Optical 50cm — RM850/scene</option>
-          <option value="1050">Multispectral 1–2m — RM1,050/scene</option>
-          <option value="650">SAR C/L Band — RM650/scene</option>
-          <option value="480">Thermal IR 5m — RM480/scene</option>
+          <option value="1800">VHR Optical 25 cm — RM 1,800/km²</option>
+          <option value="850" selected>HR Optical 50 cm — RM 850/scene</option>
+          <option value="1050">Multispectral 1–2 m — RM 1,050/scene</option>
+          <option value="650">SAR C/L Band — RM 650/scene</option>
+          <option value="480">Thermal IR 5 m — RM 480/scene</option>
         </select>
       </div>
       <div class="roi-input-row">
@@ -408,19 +590,34 @@
           <option value="52">Weekly (52×/year)</option>
         </select>
       </div>
-      <button class="roi-calc-btn" onclick="calcROI()">CALCULATE ESTIMATE</button>
+      <button class="roi-calc-btn" onclick="calcROI()">Calculate Estimate</button>
     </div>
     <div class="roi-results" id="roi-results">
-      <div class="roi-result-row"><span class="roi-result-label">Scenes Required</span><span class="roi-result-val" id="roi-scenes">—</span></div>
-      <div class="roi-result-row"><span class="roi-result-label">Cost per Acquisition</span><span class="roi-result-val" id="roi-once">—</span></div>
-      <div class="roi-result-row"><span class="roi-result-label">Annual Cost</span><span class="roi-result-val highlight" id="roi-annual">—</span></div>
-      <div class="roi-result-row"><span class="roi-result-label">Cost per km²/year</span><span class="roi-result-val green" id="roi-per-km">—</span></div>
-      <div class="roi-result-row"><span class="roi-result-label">Recommended</span><span class="roi-result-val" id="roi-rec" style="font-size:11px;">—</span></div>
+      <div class="roi-result-row">
+        <span class="roi-result-label">Scenes Required</span>
+        <span class="roi-result-val" id="roi-scenes">—</span>
+      </div>
+      <div class="roi-result-row">
+        <span class="roi-result-label">Cost per Acquisition</span>
+        <span class="roi-result-val" id="roi-once">—</span>
+      </div>
+      <div class="roi-result-row">
+        <span class="roi-result-label">Annual Cost</span>
+        <span class="roi-result-val highlight" id="roi-annual">—</span>
+      </div>
+      <div class="roi-result-row">
+        <span class="roi-result-label">Cost per km²/year</span>
+        <span class="roi-result-val green" id="roi-per-km">—</span>
+      </div>
+      <div class="roi-result-row">
+        <span class="roi-result-label">Recommendation</span>
+        <span class="roi-result-val" id="roi-rec" style="font-size:11px;">—</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- CART DRAWER -->
+<!-- CART + AUTH -->
 <div class="overlay" id="ov" onclick="toggleCart()"></div>
 <div class="cart" id="cart">
   <div class="cart-hdr"><span class="cart-ttl">Your Cart</span><button class="cart-x" onclick="toggleCart()">×</button></div>
@@ -430,14 +627,41 @@
   </div>
 </div>
 <div class="pw-bg" id="pwm" onclick="bgClose(event,'pwm')">
-  <div class="pw-box"><div class="pw-hdr"><h2>Access Verification</h2><p>Enter your UZMA credentials</p></div><div class="pw-body"><div class="field"><label>Account Email</label><input type="email" id="pw-email" placeholder="name@example.com"></div><div class="field"><label>API Password / Access Key</label><input type="password" id="pw-pass" placeholder="••••••••••••"><div class="pw-err" id="pw-err"></div></div><div class="pw-actions"><button class="pw-cancel" onclick="closeModal('pwm')">Cancel</button><button class="pw-ok" id="pw-ok" onclick="submitPW()">CONFIRM ORDER</button></div><p class="pw-note">Credentials verified via UZMA API.</p></div></div>
+  <div class="pw-box"><div class="pw-hdr"><h2>Access Verification</h2><p>Enter your UZMA credentials</p></div>
+  <div class="pw-body">
+    <div class="field"><label>Account Email</label><input type="email" id="pw-email" placeholder="name@example.com"></div>
+    <div class="field"><label>API Password / Access Key</label><input type="password" id="pw-pass" placeholder="••••••••••••"><div class="pw-err" id="pw-err"></div></div>
+    <div class="pw-actions"><button class="pw-cancel" onclick="closeModal('pwm')">Cancel</button><button class="pw-ok" id="pw-ok" onclick="submitPW()">CONFIRM ORDER</button></div>
+    <p class="pw-note">Credentials verified via UZMA API at <b>uzma.com.my</b></p>
+  </div></div>
 </div>
 <div class="auth-bg" id="auth-modal" onclick="bgClose(event,'auth-modal')">
   <div class="auth-box">
     <div class="auth-tabs"><div class="auth-tab on" id="tab-login" onclick="switchTab('login')">Log In</div><div class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</div></div>
     <button class="auth-close" onclick="closeModal('auth-modal')">×</button>
-    <div class="auth-panel on" id="panel-login"><h3>Welcome back</h3><p>Sign in to your UZMA account.</p><div class="field"><label>Email</label><input type="email" id="login-email" placeholder="name@example.com"></div><div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="login-pass" placeholder="••••••••"><button class="pw-eye" onclick="toggleEye('login-pass',this)">👁</button></div></div><div class="auth-err" id="login-err"></div><button class="auth-submit" onclick="doLogin()">LOG IN</button><div class="auth-divider"><span>OR</span></div><button class="auth-or-btn" onclick="demoLogin()">Continue as Demo User</button><div class="auth-footer">No account? <a onclick="switchTab('signup')">Sign up free</a></div></div>
-    <div class="auth-panel" id="panel-signup"><h3>Create your account</h3><p>Free access to preview all imagery.</p><div class="field"><label>Full Name</label><input type="text" id="su-name" placeholder="Ahmad bin Ibrahim"></div><div class="field"><label>Email</label><input type="email" id="su-email" placeholder="name@example.com"></div><div class="field"><label>Organisation</label><input type="text" id="su-org" placeholder="Company / University"></div><div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="su-pass" placeholder="Min. 8 characters" oninput="checkStrength(this.value)"><button class="pw-eye" onclick="toggleEye('su-pass',this)">👁</button></div><div class="strength-bar"><div class="strength-fill" id="strength-fill" style="width:0%;background:#E24B4A;"></div></div></div><div class="auth-err" id="su-err"></div><button class="auth-submit" onclick="doSignup()">CREATE ACCOUNT</button><div class="auth-footer">Already have an account? <a onclick="switchTab('login')">Log in</a></div></div>
+    <div class="auth-panel on" id="panel-login">
+      <h3>Welcome Back</h3><p>Sign in to your UZMA account.</p>
+      <div class="field"><label>Email</label><input type="email" id="login-email" placeholder="name@example.com"></div>
+      <div class="field"><label>Password</label><div class="pw-toggle"><input type="password" id="login-pass" placeholder="••••••••"><button class="pw-eye" onclick="toggleEye('login-pass',this)">👁</button></div></div>
+      <div class="auth-err" id="login-err"></div>
+      <button class="auth-submit" onclick="doLogin()">LOG IN</button>
+      <div class="auth-divider"><span>OR</span></div>
+      <button class="auth-or-btn" onclick="demoLogin()">Continue as Demo User</button>
+      <div class="auth-footer">No account? <a onclick="switchTab('signup')">Sign up free</a></div>
+    </div>
+    <div class="auth-panel" id="panel-signup">
+      <h3>Create Account</h3><p>Free access to preview all imagery.</p>
+      <div class="field"><label>Full Name</label><input type="text" id="su-name" placeholder="Ahmad bin Ibrahim"></div>
+      <div class="field"><label>Email</label><input type="email" id="su-email" placeholder="name@example.com"></div>
+      <div class="field"><label>Organisation</label><input type="text" id="su-org" placeholder="Company / University"></div>
+      <div class="field"><label>Password</label>
+        <div class="pw-toggle"><input type="password" id="su-pass" placeholder="Min. 8 characters" oninput="checkStrength(this.value)"><button class="pw-eye" onclick="toggleEye('su-pass',this)">👁</button></div>
+        <div class="strength-bar"><div class="strength-fill" id="strength-fill" style="width:0%;background:#E24B4A;"></div></div>
+      </div>
+      <div class="auth-err" id="su-err"></div>
+      <button class="auth-submit" onclick="doSignup()">CREATE ACCOUNT</button>
+      <div class="auth-footer">Already have an account? <a onclick="switchTab('login')">Log in</a></div>
+    </div>
   </div>
 </div>
 
@@ -448,70 +672,144 @@ function toggleMobileNav(){
   document.getElementById('nav-hamburger').classList.toggle('open');
 }
 
+/* ===== AI RECOMMENDER ===== */
 async function getAIRecommendation(){
-  const usecase=document.getElementById('ai-usecase').value;
-  const budget=document.getElementById('ai-budget').value;
-  const area=document.getElementById('ai-area').value;
-  if(!usecase||!budget||!area){showToast('Please answer all 3 questions');return;}
-  const loading=document.getElementById('ai-rec-loading');
-  const result=document.getElementById('ai-rec-result');
-  loading.classList.add('show');result.classList.remove('show');
-  document.querySelectorAll('.prod-card').forEach(c=>{c.classList.remove('highlighted');});
-  document.querySelectorAll('.ai-rec-badge').forEach(b=>b.remove());
-  try{
-    const response=await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,
-        messages:[{role:"user",content:`You are a satellite imagery expert for UZMA portal in Malaysia.
-Available products: VHR Optical 25cm: RM1,800/km², HR Optical 50cm: RM850/scene, Multispectral 1-2m: RM1,050/scene, SAR C/L Band: RM650/scene, Thermal IR 5m: RM480/scene, Bundle: RM2,200
-User needs: Use case: ${usecase}, Budget: ${budget}, Area size: ${area}
-Respond ONLY with raw JSON: {"recommended":"product name","reason":"2-3 sentence explanation","also_consider":"one alternative or null","product_key":"one of vhr/hr/ms/sar/tir/bundle"}`}]
+  const usecase = document.getElementById('ai-usecase').value;
+  const budget  = document.getElementById('ai-budget').value;
+  const area    = document.getElementById('ai-area').value;
+
+  if(!usecase || !budget || !area){
+    showToast('⚠ Please answer all 3 questions first');
+    return;
+  }
+
+  const loading = document.getElementById('ai-rec-loading');
+  const result  = document.getElementById('ai-rec-result');
+  const btn     = document.getElementById('ai-rec-btn-main');
+
+  loading.classList.add('show');
+  result.classList.remove('show');
+  btn.disabled = true;
+
+  // Clear previous highlights
+  document.querySelectorAll('.prod-card').forEach(c => c.classList.remove('highlighted'));
+  document.querySelectorAll('.ai-rec-badge').forEach(b => b.remove());
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 500,
+        messages: [{
+          role: 'user',
+          content: `You are a satellite imagery expert for UZMA, a geospatial data platform in Malaysia.
+
+Available products:
+- VHR Optical 25cm: RM1,800/km² — ultra-high res, urban/defence
+- HR Optical 50cm: RM850/scene — high res, mapping/disaster  
+- Multispectral 1-2m: RM1,050/scene — 8-band, NDVI, agriculture
+- SAR C/L Band: RM650/scene — cloud-penetrating, flood/maritime
+- Thermal IR 5m: RM480/scene — heat mapping, industrial
+- Bundle: RM2,200 — all sensor types, research/government
+
+User requirements:
+- Use case: ${usecase}
+- Budget: ${budget}
+- Study area: ${area}
+
+Respond ONLY with a valid JSON object, no markdown, no extra text:
+{"recommended":"exact product name","reason":"2-3 concise sentences explaining why this is the best fit","also_consider":"one alternative product name or null","product_key":"one of: vhr, hr, ms, sar, tir, bundle"}`
+        }]
       })
     });
-    const data=await response.json();
-    const text=data.content?.find(c=>c.type==='text')?.text||'';
-    const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+
+    if(!response.ok){
+      throw new Error(`API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const rawText = data.content?.find(c => c.type === 'text')?.text || '';
+    // Strip any accidental markdown fences
+    const cleanText = rawText.replace(/```json\n?|\n?```/g, '').trim();
+    const parsed = JSON.parse(cleanText);
+
     loading.classList.remove('show');
-    result.innerHTML=`<strong style="color:var(--orange);">✓ ${parsed.recommended}</strong><br>${parsed.reason}${parsed.also_consider?`<br><span style="color:#888;font-size:11px;">Also consider: ${parsed.also_consider}</span>`:''}`;
+    btn.disabled = false;
+
+    result.innerHTML = `
+      <strong style="color:var(--orange);font-size:13px;">✓ ${parsed.recommended}</strong><br>
+      <span style="color:#aaa;">${parsed.reason}</span>
+      ${parsed.also_consider ? `<br><span style="color:#666;font-size:11px;margin-top:4px;display:inline-block;">Also consider: ${parsed.also_consider}</span>` : ''}`;
     result.classList.add('show');
-    const card=document.querySelector(`[data-product="${parsed.product_key}"]`);
-    if(card){card.classList.add('highlighted');const b=document.createElement('span');b.className='ai-rec-badge';b.textContent='⭐ AI PICK';card.querySelector('.prod-card-top').appendChild(b);card.scrollIntoView({behavior:'smooth',block:'center'});}
-  }catch(e){loading.classList.remove('show');result.innerHTML='<span style="color:#E24B4A;">Could not get recommendation. Please try again.</span>';result.classList.add('show');}
-}
 
-function setSpecView(mode,btn){
-  document.querySelectorAll('.spec-tog').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
-  const table=document.getElementById('spec-table');
-  if(mode==='optical'){
-    table.querySelectorAll('tr').forEach(row=>{[...row.cells].forEach((c,i)=>{c.style.display=(i===0||i===1||i===2)?'':'none';});});
-  }else{
-    table.querySelectorAll('tr').forEach(row=>{[...row.cells].forEach(c=>{c.style.display='';});});
+    // Highlight matching card
+    const card = document.querySelector(`[data-product="${parsed.product_key}"]`);
+    if(card){
+      card.classList.add('highlighted');
+      const badge = document.createElement('span');
+      badge.className = 'ai-rec-badge';
+      badge.textContent = '⭐ AI PICK';
+      card.querySelector('.prod-card-top').appendChild(badge);
+      card.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+
+  } catch(err) {
+    loading.classList.remove('show');
+    btn.disabled = false;
+    result.innerHTML = `<span style="color:#E86A1A;">⚠ Unable to get recommendation. Please try again.</span>`;
+    result.classList.add('show');
+    console.error('AI Recommender error:', err);
   }
-  if(mode==='best'){
-    const priceRow=table.querySelectorAll('tbody tr')[1];
-    if(priceRow)priceRow.cells[4]?.classList.add('spec-best');
-    table.querySelectorAll('tbody tr')[0]?.cells[1]?.classList.add('spec-best');
-  }else{table.querySelectorAll('.spec-best').forEach(c=>c.classList.remove('spec-best'));}
 }
 
-const sceneCoverage={1800:1,850:25,1050:100,650:200,480:500};
+/* ===== SPEC VIEW TOGGLE ===== */
+function setSpecView(mode, btn){
+  document.querySelectorAll('.spec-tog').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const table = document.getElementById('spec-table');
+  if(mode === 'optical'){
+    table.querySelectorAll('tr').forEach(row => {
+      [...row.cells].forEach((c,i) => { c.style.display = (i===0||i===1||i===2) ? '' : 'none'; });
+    });
+  } else {
+    table.querySelectorAll('tr').forEach(row => {
+      [...row.cells].forEach(c => { c.style.display = ''; });
+    });
+  }
+  // Clear then re-apply best highlights
+  table.querySelectorAll('.spec-best').forEach(c => c.classList.remove('spec-best'));
+  if(mode === 'best'){
+    // Best resolution = VHR (col 1)
+    table.querySelectorAll('tbody tr')[0]?.cells[1]?.classList.add('spec-best');
+    // Cheapest = Thermal (col 5)
+    table.querySelectorAll('tbody tr')[1]?.cells[5]?.classList.add('spec-best');
+  }
+}
+
+/* ===== COST ESTIMATOR ===== */
+const sceneCoverage = {1800:1, 850:25, 1050:100, 650:200, 480:500};
+
 function calcROI(){
-  const p=parseFloat(document.getElementById('roi-product').value);
-  const a=parseFloat(document.getElementById('roi-area').value)||0;
-  const f=parseInt(document.getElementById('roi-freq').value);
-  const cov=sceneCoverage[p];
-  let scenes,cost;
-  if(p===1800){scenes=a;cost=a*1800;}else{scenes=Math.ceil(a/cov);cost=scenes*p;}
-  const annual=cost*f;
-  const perKm=a>0?annual/a:0;
-  let rec='Bundle Package (best for large/frequent)';
-  if(a<50&&f===1)rec='HR Optical 50cm';
-  else if(a>200)rec='SAR C/L Band (widest coverage)';
-  document.getElementById('roi-scenes').textContent=p===1800?`${a} km²`:`${scenes} scene${scenes>1?'s':''}`;
-  document.getElementById('roi-once').textContent=`RM ${cost.toLocaleString()}`;
-  document.getElementById('roi-annual').textContent=`RM ${annual.toLocaleString()}`;
-  document.getElementById('roi-per-km').textContent=a>0?`RM ${perKm.toFixed(0)}/km²`:'—';
-  document.getElementById('roi-rec').textContent=rec;
+  const p = parseFloat(document.getElementById('roi-product').value);
+  const a = parseFloat(document.getElementById('roi-area').value) || 0;
+  const f = parseInt(document.getElementById('roi-freq').value);
+  const cov = sceneCoverage[p];
+  let scenes, cost;
+  if(p === 1800){ scenes = a; cost = a * 1800; }
+  else { scenes = Math.ceil(a / cov); cost = scenes * p; }
+  const annual = cost * f;
+  const perKm = a > 0 ? annual / a : 0;
+  let rec = 'Bundle Package (best value for large/frequent acquisitions)';
+  if(a < 50 && f === 1)       rec = 'HR Optical 50 cm — ideal for small one-off coverage';
+  else if(a > 200)            rec = 'SAR C/L Band — widest coverage per scene';
+  else if(f >= 26)            rec = 'Bundle Package — priority queue for high-frequency';
+  document.getElementById('roi-scenes').textContent  = p===1800 ? `${a} km²` : `${scenes} scene${scenes!==1?'s':''}`;
+  document.getElementById('roi-once').textContent    = `RM ${cost.toLocaleString()}`;
+  document.getElementById('roi-annual').textContent  = `RM ${annual.toLocaleString()}`;
+  document.getElementById('roi-per-km').textContent  = a > 0 ? `RM ${perKm.toFixed(0)}/km²` : '—';
+  document.getElementById('roi-rec').textContent     = rec;
 }
 calcROI();
 </script>
